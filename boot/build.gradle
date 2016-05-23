@@ -1,0 +1,5 @@
+dependencies {
+
+    compile group: "org.springframework.boot", name: "spring-boot-autoconfigure", version: "${springBootVersion}"
+    compile project(":core")
+}

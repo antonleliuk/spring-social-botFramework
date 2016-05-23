@@ -1,0 +1,23 @@
+subprojects {
+    apply plugin: "java"
+    apply plugin: "idea"
+    apply plugin: "eclipse"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    version = "1.0"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+        compile("org.springframework.social:spring-social-core:$springSocialVersion")
+        compile("org.springframework.social:spring-social-config:$springSocialVersion")
+//        runtime("org.springframework.social:spring-social-twitter:1.1.2.RELEASE")
+//        runtime("org.springframework.social:spring-social-facebook:2.0.3.RELEASE")
+//        compile "org.springframework.security.oauth:spring-security-oauth2:$springSecurityOAuth2Version"
+    }
+
+}
