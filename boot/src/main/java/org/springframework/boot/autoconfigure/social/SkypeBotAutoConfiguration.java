@@ -45,7 +45,7 @@ public class SkypeBotAutoConfiguration {
 
         @Override
         public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
-            super.addConnectionFactories(connectionFactoryConfigurer, environment);
+            connectionFactoryConfigurer.addConnectionFactory(skypeBotConnectionFactory());
         }
 
         @Override
