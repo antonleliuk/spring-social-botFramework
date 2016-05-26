@@ -1,0 +1,18 @@
+apply plugin: "spring-boot"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+dependencies {
+    compile project(":core")
+    compile project(":boot")
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+}
+
+task stage(dependsOn: build)
