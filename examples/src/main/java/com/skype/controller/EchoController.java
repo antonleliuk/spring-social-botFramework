@@ -25,6 +25,7 @@ public class EchoController {
         for (org.springframework.social.skypeBot.api.data.from.Message message : messages) {
             Message toSkype = new Message();
             toSkype.setContent(message.getContent());
+            System.out.println(message.getContent());
             skypeBot.sendMessage(message.getFrom(), toSkype);
         }
 
