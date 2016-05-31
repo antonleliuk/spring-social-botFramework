@@ -54,7 +54,6 @@ public class SkypeBotAutoConfiguration {
 
         @Bean
         @ConditionalOnMissingBean(SkypeBot.class)
-//        @Scope(value="request", proxyMode = ScopedProxyMode.INTERFACES)
         public SkypeBot skypeBot(ConnectionRepository repository, SkypeBotConnectionFactory connectionFactory){
             Connection<SkypeBot> skypeBot = repository.findPrimaryConnection(SkypeBot.class);
             if (skypeBot == null) {
@@ -68,7 +67,6 @@ public class SkypeBotAutoConfiguration {
         }
 
         @Bean
-//        @Scope(value="request", proxyMode= ScopedProxyMode.INTERFACES)
         public ConnectionRepository connectionRepository(UsersConnectionRepository usersConnectionRepository) {
             return usersConnectionRepository.createConnectionRepository(getUserIdSource().getUserId());
         }
