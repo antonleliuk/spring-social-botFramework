@@ -24,7 +24,9 @@ public class SkypeBotApiHelper implements ApiHelper<SkypeBot> {
 
     @Override
     public SkypeBot getApi() {
-        Connection<SkypeBot> connection = usersConnectionRepository.createConnectionRepository(userIdSource.getUserId()).findPrimaryConnection(SkypeBot.class);
+        Connection<SkypeBot> connection = usersConnectionRepository
+                .createConnectionRepository(userIdSource.getUserId())
+                .findPrimaryConnection(SkypeBot.class);
         return connection != null ? connection.getApi() : null;
     }
 }
