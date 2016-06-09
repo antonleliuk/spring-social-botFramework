@@ -15,5 +15,9 @@ public enum AttachmentType {
      * Compatible with Skype Video Message specifically, MP4,
      * AAC+H264 up to 20 MB (approximately 1 minute of video at 2 Mbps)
      */
-    Video
+    Video,
+
+    Audio,
+
+    File
 }

@@ -5,5 +5,17 @@ package org.springframework.social.skypeBot.api.dict;
  */
 public enum ActivityType {
 
-    message
+    error,
+    personalMessage,
+    groupMessage,
+    message,
+    threadBotAdded,
+    threadBotRemoved,
+    threadAddMember,
+    threadRemoveMember,
+    threadTopicUpdated,
+    threadHistoryDisclosedUpdate,
+    contactAdded,
+    contactRemoved,
+    attachment
 }
