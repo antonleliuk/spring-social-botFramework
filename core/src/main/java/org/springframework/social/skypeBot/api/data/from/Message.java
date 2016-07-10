@@ -1,8 +1,10 @@
 package org.springframework.social.skypeBot.api.data.from;
 
-import org.springframework.social.skypeBot.api.dict.AttachmentType;
+import org.springframework.social.skypeBot.api.dict.ActivityType;
 
 /**
+ * Message notification. When a message is sent to Bot or group thread the Bot is member of,
+ * notification of the following format will be sent to Bot URL
  * @author Anton Leliuk
  */
 public class Message extends BaseMessage {
@@ -12,9 +14,10 @@ public class Message extends BaseMessage {
      */
     private String content;
 
-    private AttachmentType type;
-
-    private String name;
+    @Override
+    public ActivityType getActivity() {
+        return ActivityType.message;
+    }
 
     public String getContent() {
         return content;
@@ -24,19 +27,4 @@ public class Message extends BaseMessage {
         this.content = content;
     }
 
-    public AttachmentType getType() {
-        return type;
-    }
-
-    public void setType(AttachmentType type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

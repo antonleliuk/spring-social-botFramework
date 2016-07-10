@@ -1,4 +1,4 @@
-package org.springframework.social.skypeBot.api.data.to;
+package org.springframework.social.skypeBot.api.data.common;
 
 /**
  * Attachment view

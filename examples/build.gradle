@@ -13,6 +13,7 @@ dependencies {
     compile project(":core")
     compile project(":boot")
     compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    testCompile group: "org.springframework.boot", name: "spring-boot-starter-test", version: "$springBootVersion"
 }
 
 task stage(dependsOn: build)

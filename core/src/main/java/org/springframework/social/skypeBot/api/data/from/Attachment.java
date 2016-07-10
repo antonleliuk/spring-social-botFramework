@@ -1,37 +1,32 @@
-package org.springframework.social.skypeBot.api.data.to;
+package org.springframework.social.skypeBot.api.data.from;
 
 import java.util.List;
 
 import org.springframework.social.skypeBot.api.data.common.View;
+import org.springframework.social.skypeBot.api.dict.ActivityType;
 import org.springframework.social.skypeBot.api.dict.AttachmentType;
 
 /**
- * Information about the stored attachment.
+ * Attachment notification
  * @author Anton Leliuk
  */
-public class AttachmentViewResponse {
+public class Attachment extends BaseMessage {
 
     /**
-     * Available attachment views
-     */
-    private List<View> views;
-
-    /**
-     * Attachment type
+     * The content type
      */
     private AttachmentType type;
 
     /**
-     * (Optional) The attachment's name
+     * The attachment's name.
      */
     private String name;
 
-    public List<View> getViews() {
-        return views;
-    }
+    private List<View> views;
 
-    public void setViews(List<View> views) {
-        this.views = views;
+    @Override
+    public ActivityType getActivity() {
+        return ActivityType.attachment;
     }
 
     public AttachmentType getType() {
@@ -48,5 +43,13 @@ public class AttachmentViewResponse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<View> getViews() {
+        return views;
+    }
+
+    public void setViews(List<View> views) {
+        this.views = views;
     }
 }

@@ -1,0 +1,3 @@
+dependencies {
+    compile group: "org.springframework", name: "spring-web", version: "${springVersion}"
+}

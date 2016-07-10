@@ -3,10 +3,22 @@ package org.springframework.social.skypeBot.api.data.from;
 import java.util.Date;
 
 import org.springframework.social.skypeBot.api.dict.ActivityType;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * @author Anton Leliuk
  */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "activity")
+@JsonSubTypes({
+        @JsonSubTypes.Type(name = "message", value = Message.class),
+        @JsonSubTypes.Type(name = "attachment", value = Attachment.class),
+        @JsonSubTypes.Type(name = "contactRelationUpdate", value = ContactRelationUpdate.class),
+        @JsonSubTypes.Type(name = "conversationUpdate", value = ConversationUpdate.class)
+})
 public abstract class BaseMessage {
 
     /**
@@ -35,7 +47,7 @@ public abstract class BaseMessage {
      * Which event happened and what other fields to expect.
      * For message this field contains constant string: “message”
      */
-    private ActivityType activity;
+    public abstract ActivityType getActivity();
 
     public String getId() {
         return id;
@@ -69,11 +81,4 @@ public abstract class BaseMessage {
         this.time = time;
     }
 
-    public ActivityType getActivity() {
-        return activity;
-    }
-
-    public void setActivity(ActivityType activity) {
-        this.activity = activity;
-    }
 }
