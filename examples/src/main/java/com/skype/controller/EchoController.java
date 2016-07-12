@@ -31,7 +31,7 @@ public class EchoController {
     }
 
     @RequestMapping(value = "/bf-chat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void botFrameworkChat(Object message){
+    public void botFrameworkChat(@RequestBody Object message){
         System.out.println(message);
     }
 
