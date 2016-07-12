@@ -28,6 +28,20 @@ public class EchoController {
             System.out.println(message.getContent());
             skypeBot.sendMessage(message.getFrom(), toSkype);
         }
-
     }
+
+    @RequestMapping(value = "/bf-chat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void botFrameworkChat(Object message){
+        System.out.println(message);
+    }
+
+//    @RequestMapping(value = "/chat/attachment/{skypeId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public void attachment(@PathVariable("skypeId") String skypeId){
+//        Attachment attachment = new Attachment();
+//        attachment.setType(AttachmentType.Image);
+//        attachment.setName("testPicture");
+//        attachment.setOriginalBase64();
+//        attachment.setThumbnailBase64();
+//        skypeBot.sendAttachment(skypeId, attachment);
+//    }
 }
