@@ -23,7 +23,8 @@ public enum ActivityType {
     conversationUpdate("activity/conversationUpdate"),
     typing("activity/typing"),
     ping("activity/ping"),
-    deleteUserData("activity/deleteUserData");
+    deleteUserData("activity/deleteUserData"),
+    card("message/card.carousel");
 
     private String realType;
 

@@ -3,12 +3,12 @@ package org.springframework.social.botFramework.api.data.to;
 /**
  * @author Anton Leliuk
  */
-public class Attachment {
+public class Attachment<C> {
 
     /**
      * Embedded content
      */
-    private String content;
+    private C content;
 
     /**
      * mimetype/content-type for the file
@@ -27,11 +27,11 @@ public class Attachment {
      */
     private String thumbnailUrl;
 
-    public String getContent() {
+    public C getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(C content) {
         this.content = content;
     }
 
