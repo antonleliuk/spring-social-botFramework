@@ -38,7 +38,7 @@ public class EchoController {
         Activity replay = from.createReplay();
         replay.setType(ActivityType.message);
         replay.setText(from.getText());
-        connectorClient.getBotFrameworkOperations().sendMessage(replay.getFrom().getId(), replay);
+        connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), replay);
     }
 
     @RequestMapping(value = "/to-bf", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
