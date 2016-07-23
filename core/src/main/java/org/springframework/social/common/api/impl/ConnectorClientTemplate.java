@@ -54,10 +54,10 @@ public class ConnectorClientTemplate extends AbstractOAuth2ApiBinding implements
     protected void configureRestTemplate(RestTemplate restTemplate) {
         restTemplate.getInterceptors().add((request, body, execution) -> {
             StringBuilder sb = new StringBuilder(System.lineSeparator())
-                    .append("-------------------")
+                    .append("-------------------").append(System.lineSeparator())
                     .append("URL = ").append(request.getURI()).append(System.lineSeparator())
                     .append("Headers = ").append(request.getHeaders()).append(System.lineSeparator())
-                    .append("Body = ").append(body).append(System.lineSeparator())
+                    .append("Body = ").append(new String(body)).append(System.lineSeparator())
                     .append("-------------------");
             System.out.println(sb);
             return execution.execute(request, body);
