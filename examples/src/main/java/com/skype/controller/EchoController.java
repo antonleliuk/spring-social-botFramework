@@ -65,7 +65,7 @@ public class EchoController {
 //
 //        Attachment<SignInCard> sa = new Attachment<>();
 //        card.getAttachments().add(sa);
-        connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), replay);
+        connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), card);
     }
 
     @RequestMapping(value = "/to-bf", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
