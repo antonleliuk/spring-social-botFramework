@@ -7,6 +7,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.skypeBot.api.SkypeBotOperations;
 import org.springframework.social.skypeBot.api.impl.SkypeBotTemplate;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Anton Leliuk
@@ -49,4 +50,17 @@ public class ConnectorClientTemplate extends AbstractOAuth2ApiBinding implements
         this.botFrameworkOperations = new BotFrameworkTemplate(getRestTemplate(), skypeUrl, apiVersion);
     }
 
+    @Override
+    protected void configureRestTemplate(RestTemplate restTemplate) {
+        restTemplate.getInterceptors().add((request, body, execution) -> {
+            StringBuilder sb = new StringBuilder(System.lineSeparator())
+                    .append("-------------------")
+                    .append("URL = ").append(request.getURI()).append(System.lineSeparator())
+                    .append("Headers = ").append(request.getHeaders()).append(System.lineSeparator())
+                    .append("Body = ").append(body).append(System.lineSeparator())
+                    .append("-------------------");
+            System.out.println(sb);
+            return execution.execute(request, body);
+        });
+    }
 }
