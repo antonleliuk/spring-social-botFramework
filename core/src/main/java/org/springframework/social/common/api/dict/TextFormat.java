@@ -5,6 +5,6 @@ package org.springframework.social.common.api.dict;
  */
 public enum TextFormat {
 
-    plain, markdown
+    plain, markdown, xml
 
 }

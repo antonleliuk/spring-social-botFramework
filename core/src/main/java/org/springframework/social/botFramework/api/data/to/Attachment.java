@@ -1,8 +1,11 @@
 package org.springframework.social.botFramework.api.data.to;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * @author Anton Leliuk
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attachment<C> {
 
     /**

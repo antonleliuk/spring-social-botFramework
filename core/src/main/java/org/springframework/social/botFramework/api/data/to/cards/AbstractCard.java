@@ -1,10 +1,12 @@
 package org.springframework.social.botFramework.api.data.to.cards;
 
 import org.springframework.social.common.api.dict.CardType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * @author Anton Leliuk
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class AbstractCard {
 
     /**

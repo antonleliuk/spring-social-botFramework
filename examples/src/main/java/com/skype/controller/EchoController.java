@@ -11,6 +11,7 @@ import org.springframework.social.botFramework.api.data.to.cards.CardImage;
 import org.springframework.social.botFramework.api.data.to.cards.HeroCard;
 import org.springframework.social.common.api.ConnectorClient;
 import org.springframework.social.common.api.dict.ActivityType;
+import org.springframework.social.common.api.dict.TextFormat;
 import org.springframework.social.skypeBot.api.data.to.Message;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,7 @@ public class EchoController {
         card.setType(ActivityType.card);
         card.setText("Simple card");
         card.setSummary("Summary of the card");
+        card.setTextFormat(TextFormat.xml);
         HeroCard hc = new HeroCard();
         hc.setTitle("Hotel Radisson Blu Hotel at Disneyland (r) Paris.");
         hc.setSubtitle("<a href=\"https://disney.radisson.com\">$71 Today up to 27% off</a><br>Booked in the last 2 hours");
