@@ -1,13 +1,13 @@
-package org.springframework.social.skypeBot.connect;
+package org.springframework.social.common.connect;
 
 
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
-import org.springframework.social.skypeBot.api.SkypeBot;
+import org.springframework.social.common.api.ConnectorClient;
 
 /**
  * @author Anton Leliuk
  */
-public class SkypeBotConnectionFactory extends OAuth2ConnectionFactory<SkypeBot> {
+public class SkypeBotConnectionFactory extends OAuth2ConnectionFactory<ConnectorClient> {
 
     public static final String PROVIDER_ID = "skypeBot";
 

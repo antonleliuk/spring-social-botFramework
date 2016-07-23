@@ -1,25 +1,20 @@
 package org.springframework.social.skypeBot.api.impl;
 
-import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
-import org.springframework.social.skypeBot.api.SkypeBot;
+import org.springframework.social.common.api.impl.AbstractApiBinding;
+import org.springframework.social.skypeBot.api.SkypeBotOperations;
 import org.springframework.social.skypeBot.api.data.to.Attachment;
 import org.springframework.social.skypeBot.api.data.to.AttachmentResponse;
 import org.springframework.social.skypeBot.api.data.to.AttachmentViewResponse;
 import org.springframework.social.skypeBot.api.data.to.Message;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Anton Leliuk
  */
-public class SkypeBotTemplate extends AbstractOAuth2ApiBinding implements SkypeBot {
+public class SkypeBotTemplate extends AbstractApiBinding implements SkypeBotOperations {
 
-    private String skypeUrl;
-    private String apiVersion;
-
-    public SkypeBotTemplate(String accessToken, String skypeUrl, String apiVersion) {
-        super(accessToken);
-        this.skypeUrl = skypeUrl;
-        this.apiVersion = apiVersion;
+    public SkypeBotTemplate(RestTemplate restTemplate, String skypeUrl, String apiVersion) {
+        super(restTemplate, skypeUrl, apiVersion);
     }
 
     @Override
@@ -46,13 +41,5 @@ public class SkypeBotTemplate extends AbstractOAuth2ApiBinding implements SkypeB
                 getMainUrl().pathSegment("attachments", "{attachmentId}", "views", "viewId").toUriString(),
                 Object.class,
                 attachmentId, viewId);
-    }
-
-    private UriComponentsBuilder buildConversationUrl(String skypeId){
-        return getMainUrl().pathSegment("conversations", skypeId);
-    }
-
-    private UriComponentsBuilder getMainUrl() {
-        return UriComponentsBuilder.fromHttpUrl(skypeUrl).pathSegment(apiVersion);
     }
 }

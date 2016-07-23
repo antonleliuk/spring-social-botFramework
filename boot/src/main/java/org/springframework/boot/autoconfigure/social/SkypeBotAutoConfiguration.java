@@ -20,8 +20,8 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.skypeBot.api.SkypeBot;
-import org.springframework.social.skypeBot.connect.SkypeBotConnectionFactory;
+import org.springframework.social.common.api.ConnectorClient;
+import org.springframework.social.common.connect.SkypeBotConnectionFactory;
 
 /**
  * @author Anton Leliuk
@@ -53,14 +53,14 @@ public class SkypeBotAutoConfiguration {
         }
 
         @Bean
-        @ConditionalOnMissingBean(SkypeBot.class)
-        public SkypeBot skypeBot(ConnectionRepository repository, SkypeBotConnectionFactory connectionFactory){
-            Connection<SkypeBot> skypeBot = repository.findPrimaryConnection(SkypeBot.class);
+        @ConditionalOnMissingBean(ConnectorClient.class)
+        public ConnectorClient skypeBot(ConnectionRepository repository, SkypeBotConnectionFactory connectionFactory){
+            Connection<ConnectorClient> skypeBot = repository.findPrimaryConnection(ConnectorClient.class);
             if (skypeBot == null) {
                 AccessGrant accessGrant = connectionFactory.getOAuthOperations().authenticateClient(properties.getScope());
-                Connection<SkypeBot> connection = connectionFactory.createConnection(accessGrant);
+                Connection<ConnectorClient> connection = connectionFactory.createConnection(accessGrant);
                 repository.addConnection(connection);
-                skypeBot = repository.findPrimaryConnection(SkypeBot.class);
+                skypeBot = repository.findPrimaryConnection(ConnectorClient.class);
                 assert skypeBot != null;
             }
             return skypeBot.getApi();

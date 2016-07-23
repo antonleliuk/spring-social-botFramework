@@ -2,8 +2,9 @@ package org.springframework.social.skypeBot.api.data.from;
 
 import java.util.List;
 
-import org.springframework.social.skypeBot.api.data.common.View;
-import org.springframework.social.skypeBot.api.dict.ActivityType;
+import org.springframework.social.skypeBot.api.data.common.data.View;
+import org.springframework.social.botFramework.api.data.to.BaseMessage;
+import org.springframework.social.common.api.dict.ActivityType;
 import org.springframework.social.skypeBot.api.dict.AttachmentType;
 
 /**

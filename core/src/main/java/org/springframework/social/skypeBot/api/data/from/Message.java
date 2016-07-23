@@ -1,13 +1,13 @@
 package org.springframework.social.skypeBot.api.data.from;
 
-import org.springframework.social.skypeBot.api.dict.ActivityType;
+import org.springframework.social.common.api.dict.ActivityType;
 
 /**
  * Message notification. When a message is sent to Bot or group thread the Bot is member of,
  * notification of the following format will be sent to Bot URL
  * @author Anton Leliuk
  */
-public class Message extends BaseMessage {
+public class Message extends BaseSkypeBotMessage {
 
     /**
      * The message's text content including rich text and the canonical representations of emoticons

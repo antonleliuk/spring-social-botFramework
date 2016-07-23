@@ -2,7 +2,7 @@ package org.springframework.social.skypeBot.api.data.to;
 
 import java.util.List;
 
-import org.springframework.social.skypeBot.api.data.common.View;
+import org.springframework.social.skypeBot.api.data.common.data.View;
 import org.springframework.social.skypeBot.api.dict.AttachmentType;
 
 /**

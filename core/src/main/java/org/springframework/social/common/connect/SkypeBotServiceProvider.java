@@ -1,14 +1,14 @@
-package org.springframework.social.skypeBot.connect;
+package org.springframework.social.common.connect;
 
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import org.springframework.social.oauth2.OAuth2Template;
-import org.springframework.social.skypeBot.api.SkypeBot;
-import org.springframework.social.skypeBot.api.impl.SkypeBotTemplate;
+import org.springframework.social.common.api.ConnectorClient;
+import org.springframework.social.common.api.impl.ConnectorClientTemplate;
 
 /**
  * @author Anton Leliuk
  */
-public class SkypeBotServiceProvider extends AbstractOAuth2ServiceProvider<SkypeBot> {
+public class SkypeBotServiceProvider extends AbstractOAuth2ServiceProvider<ConnectorClient> {
     
     private String skypeUrl;
     private String apiVersion;
@@ -26,7 +26,7 @@ public class SkypeBotServiceProvider extends AbstractOAuth2ServiceProvider<Skype
     }
 
     @Override
-    public SkypeBot getApi(String accessToken) {
-        return new SkypeBotTemplate(accessToken, skypeUrl, apiVersion);
+    public ConnectorClient getApi(String accessToken) {
+        return new ConnectorClientTemplate(accessToken, skypeUrl, apiVersion);
     }
 }

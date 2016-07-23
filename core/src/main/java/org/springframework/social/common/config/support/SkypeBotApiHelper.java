@@ -1,17 +1,17 @@
-package org.springframework.social.skypeBot.config.support;
+package org.springframework.social.common.config.support;
 
 import org.springframework.social.UserIdSource;
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.skypeBot.api.SkypeBot;
+import org.springframework.social.common.api.ConnectorClient;
 
 /**
  * Support class for JavaConfig and XML configuration support.
  * Creates an API binding instance for the current user's connection.
  * @author Anton Leliuk
  */
-public class SkypeBotApiHelper implements ApiHelper<SkypeBot> {
+public class SkypeBotApiHelper implements ApiHelper<ConnectorClient> {
 
     private final UsersConnectionRepository usersConnectionRepository;
 
@@ -23,10 +23,10 @@ public class SkypeBotApiHelper implements ApiHelper<SkypeBot> {
     }
 
     @Override
-    public SkypeBot getApi() {
-        Connection<SkypeBot> connection = usersConnectionRepository
+    public ConnectorClient getApi() {
+        Connection<ConnectorClient> connection = usersConnectionRepository
                 .createConnectionRepository(userIdSource.getUserId())
-                .findPrimaryConnection(SkypeBot.class);
+                .findPrimaryConnection(ConnectorClient.class);
         return connection != null ? connection.getApi() : null;
     }
 }

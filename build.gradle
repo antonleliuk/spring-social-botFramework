@@ -13,6 +13,7 @@ subprojects {
 
     dependencies {
         compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+        compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile("org.springframework.social:spring-social-core:$springSocialVersion"){
             transitive = false
 //            exclude module: "spring-core"
