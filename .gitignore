@@ -16,3 +16,4 @@ hs_err_pid*
 build
 
 !gradle-wrapper.jar
+/examples/src/main/resources/application.properties
