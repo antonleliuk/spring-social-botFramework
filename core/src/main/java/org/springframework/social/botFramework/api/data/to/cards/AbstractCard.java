@@ -1,7 +1,9 @@
 package org.springframework.social.botFramework.api.data.to.cards;
 
+import org.springframework.social.botFramework.api.json.CardTypeSerializer;
 import org.springframework.social.common.api.dict.CardType;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * @author Anton Leliuk
@@ -24,6 +26,7 @@ public abstract class AbstractCard {
      */
     private String title;
 
+    @JsonSerialize(using = CardTypeSerializer.class)
     public abstract CardType getCardType();
 
     public String getSubtitle() {
