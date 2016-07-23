@@ -111,6 +111,8 @@ public class Activity extends BaseBotFrameworkMessage {
         Activity replay = new Activity();
         replay.setFrom(recipient);
         replay.setRecipient(from);
+        replay.setServiceUrl(getServiceUrl());
+        replay.setChannelId(getChannelId());
         return replay;
     }
 
