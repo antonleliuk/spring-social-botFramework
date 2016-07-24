@@ -38,6 +38,7 @@ public enum ActivityType {
                 return type;
             }
         }
+        System.err.println("Unknown activity type - " + key);
         return unknown;
     }
 

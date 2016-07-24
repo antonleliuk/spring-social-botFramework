@@ -48,7 +48,9 @@ public class EchoController {
         try {
             StringWriter sw = new StringWriter();
             objectMapper.writer().writeValue(sw, from);
+            System.out.println("Incoming message ------------");
             System.out.println(sw.toString());
+            System.out.println("Incoming message ------------");
         } catch (IOException e) {
             e.printStackTrace();
         }
