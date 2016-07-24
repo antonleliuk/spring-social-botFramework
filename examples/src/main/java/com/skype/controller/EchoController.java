@@ -1,5 +1,7 @@
 package com.skype.controller;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Anton Leliuk
@@ -26,6 +29,9 @@ public class EchoController {
 
     @Autowired
     private ConnectorClient connectorClient;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @RequestMapping(value = "/chat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void chat(@RequestBody List<org.springframework.social.skypeBot.api.data.from.Message> messages){
@@ -39,6 +45,13 @@ public class EchoController {
 
     @RequestMapping(value = "/bf-chat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void botFrameworkChat(@RequestBody Activity from){
+        try {
+            StringWriter sw = new StringWriter();
+            objectMapper.writer().writeValue(sw, from);
+            System.out.println(sw.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Activity replay = from.createReplay();
         replay.setType(ActivityType.message);
         replay.setText(from.getText());
