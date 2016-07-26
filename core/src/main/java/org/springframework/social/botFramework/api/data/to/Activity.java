@@ -1,5 +1,6 @@
 package org.springframework.social.botFramework.api.data.to;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.social.botFramework.api.data.from.BaseBotFrameworkMessage;
@@ -119,6 +120,14 @@ public class Activity extends BaseBotFrameworkMessage {
     @Override
     public ActivityType getActivity() {
         return type;
+    }
+
+    public <C>Activity addAttachment(Attachment<C> attachment){
+        if(attachments == null){
+            attachments = new ArrayList<>();
+        }
+        attachments.add(attachment);
+        return this;
     }
 
     public String getAction() {
