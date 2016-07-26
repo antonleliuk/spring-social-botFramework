@@ -1,13 +1,12 @@
 package org.springframework.social.botFramework.api.data.to;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.social.botFramework.api.data.from.BaseBotFrameworkMessage;
 import org.springframework.social.botFramework.api.json.ActivityTypeDeserializer;
 import org.springframework.social.botFramework.api.json.ActivityTypeSerializer;
-import org.springframework.social.common.api.dict.AttachmentLayout;
 import org.springframework.social.common.api.dict.ActivityType;
+import org.springframework.social.common.api.dict.AttachmentLayout;
 import org.springframework.social.common.api.dict.TextFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -26,9 +25,9 @@ public class Activity extends BaseBotFrameworkMessage {
     /**
      * Layout of multiple attachments
     */
-    private AttachmentLayout attachmentLayout = AttachmentLayout.list;
+    private AttachmentLayout attachmentLayout;
 
-    private List<Attachment> attachments = new ArrayList<>();
+    private List<Attachment> attachments;
 
     /**
      * Channel specific payload
@@ -60,12 +59,12 @@ public class Activity extends BaseBotFrameworkMessage {
     /**
      * Addresses of added contacts
      */
-    private List<ChannelAccount> membersAdded = new ArrayList<>();
+    private List<ChannelAccount> membersAdded;
 
     /**
      * Addresses of removed contacts
      */
-    private List<ChannelAccount> membersRemoved = new ArrayList<>();
+    private List<ChannelAccount> membersRemoved;
 
 
     private Object properties;
@@ -93,7 +92,7 @@ public class Activity extends BaseBotFrameworkMessage {
     /**
      * Format of text fields
      */
-    private TextFormat textFormat = TextFormat.markdown;
+    private TextFormat textFormat;
 
     /**
      * Conversations new topic name

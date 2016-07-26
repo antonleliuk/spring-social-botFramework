@@ -55,7 +55,7 @@ public class EchoController {
             e.printStackTrace();
         }
         Activity replay = from.createReplay();
-        replay.setType(ActivityType.message);
+        replay.setType(ActivityType.text_message);
         replay.setText(from.getText());
         connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), replay);
 
@@ -69,7 +69,7 @@ public class EchoController {
         hc.setSubtitle("<a href=\"https://disney.radisson.com\">$71 Today up to 27% off</a><br>Booked in the last 2 hours");
         hc.setText("Disneyland paris. 40 Aliee De la Mare dian Houleuse, Magny-le-Hongre, Seine-Marne.");
         CardImage ci = new CardImage();
-        ci.setUrl("http://minionomaniya.ru/wp-content/uploads/2015/10/%D0%BC%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD%D1%8B-%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8-%D0%B2-%D1%85%D0%BE%D1%80%D0%BE%D1%88%D0%B5%D0%BC-%D0%BA%D0%B0%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%B5.jpg");
+        ci.setUrl("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg");
         ci.setAlt("hello thumb");
         hc.getImages().add(ci);
 
@@ -88,7 +88,7 @@ public class EchoController {
     @RequestMapping(value = "/to-bf", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void sendMessageToBotFramework(){
         Activity activity = new Activity();
-        activity.setType(ActivityType.message);
+        activity.setType(ActivityType.text_message);
         activity.setServiceUrl("https://skype.botframework.com");
         activity.setChannelId("skype");
         ChannelAccount recipient = new ChannelAccount();
