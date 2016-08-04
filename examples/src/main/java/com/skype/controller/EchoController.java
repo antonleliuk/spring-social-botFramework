@@ -11,6 +11,7 @@ import org.springframework.social.botFramework.api.data.to.Attachment;
 import org.springframework.social.botFramework.api.data.to.ChannelAccount;
 import org.springframework.social.botFramework.api.data.to.cards.CardImage;
 import org.springframework.social.botFramework.api.data.to.cards.HeroCard;
+import org.springframework.social.botFramework.api.data.to.cards.SignInCard;
 import org.springframework.social.common.api.ConnectorClient;
 import org.springframework.social.common.api.dict.ActivityType;
 import org.springframework.social.common.api.dict.TextFormat;
@@ -79,10 +80,14 @@ public class EchoController {
             a.setContentType(hc.getCardType().getType());
             card.addAttachment(a);
 
-//        SignInCard sc = new SignInCard();
-//
-//        Attachment<SignInCard> sa = new Attachment<>();
-//        card.getAttachments().add(sa);
+            SignInCard sc = new SignInCard();
+            sc.setTitle("Sign title");
+            sc.setText("Some text");
+            sc.setSubtitle("Some subtitle");
+            Attachment<SignInCard> sa = new Attachment<>();
+            sa.setContent(sc);
+            sa.setContentType(sc.getCardType().getType());
+            card.getAttachments().add(sa);
             connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), card);
         }
     }

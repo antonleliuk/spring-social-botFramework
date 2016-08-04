@@ -20,7 +20,7 @@ public enum ActivityType {
 //    contactAdded,
 //    contactRemoved,
     attachment("message/image"),
-    contactRelationUpdate("activity/contactRelationUpdate"),
+    contactRelationUpdate("contactRelationUpdate"),
     conversationUpdate("activity/conversationUpdate"),
     typing("activity/typing"),
     ping("ping"),
