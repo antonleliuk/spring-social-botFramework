@@ -78,7 +78,7 @@ public class EchoController {
             Attachment<HeroCard> a = new Attachment<>();
             a.setContent(hc);
             a.setContentType(hc.getCardType().getType());
-            card.addAttachment(a);
+//            card.addAttachment(a);
 
             SignInCard sc = new SignInCard();
             sc.setTitle("Sign title");
