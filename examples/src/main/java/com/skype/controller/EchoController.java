@@ -87,7 +87,7 @@ public class EchoController {
             Attachment<SignInCard> sa = new Attachment<>();
             sa.setContent(sc);
             sa.setContentType(sc.getCardType().getType());
-            card.getAttachments().add(sa);
+            card.addAttachment(sa);
             connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), card);
         }
     }
