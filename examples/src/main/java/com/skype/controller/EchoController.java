@@ -54,35 +54,37 @@ public class EchoController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Activity replay = from.createReplay();
-        replay.setType(ActivityType.text_message);
-        replay.setText(from.getText());
-        connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), replay);
+        if(!from.getActivity().isPing()){
+            Activity replay = from.createReplay();
+            replay.setType(ActivityType.text_message);
+            replay.setText(from.getText());
+            connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), replay);
 
-        Activity card = from.createReplay();
-        card.setType(ActivityType.card);
-        card.setText("Simple card");
-        card.setSummary("Summary of the card");
-        card.setTextFormat(TextFormat.xml);
-        HeroCard hc = new HeroCard();
-        hc.setTitle("Hotel Radisson Blu Hotel at Disneyland (r) Paris.");
-        hc.setSubtitle("<a href=\"https://disney.radisson.com\">$71 Today up to 27% off</a><br>Booked in the last 2 hours");
-        hc.setText("Disneyland paris. 40 Aliee De la Mare dian Houleuse, Magny-le-Hongre, Seine-Marne.");
-        CardImage ci = new CardImage();
-        ci.setUrl("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg");
-        ci.setAlt("hello thumb");
-        hc.getImages().add(ci);
+            Activity card = from.createReplay();
+            card.setType(ActivityType.card);
+            card.setText("Simple card");
+            card.setSummary("Summary of the card");
+            card.setTextFormat(TextFormat.xml);
+            HeroCard hc = new HeroCard();
+            hc.setTitle("Hotel Radisson Blu Hotel at Disneyland (r) Paris.");
+            hc.setSubtitle("<a href=\"https://disney.radisson.com\">$71 Today up to 27% off</a><br>Booked in the last 2 hours");
+            hc.setText("Disneyland paris. 40 Aliee De la Mare dian Houleuse, Magny-le-Hongre, Seine-Marne.");
+            CardImage ci = new CardImage();
+            ci.setUrl("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg");
+            ci.setAlt("hello thumb");
+            hc.getImages().add(ci);
 
-        Attachment<HeroCard> a = new Attachment<>();
-        a.setContent(hc);
-        a.setContentType(hc.getCardType().getType());
-        card.addAttachment(a);
+            Attachment<HeroCard> a = new Attachment<>();
+            a.setContent(hc);
+            a.setContentType(hc.getCardType().getType());
+            card.addAttachment(a);
 
 //        SignInCard sc = new SignInCard();
 //
 //        Attachment<SignInCard> sa = new Attachment<>();
 //        card.getAttachments().add(sa);
-        connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), card);
+            connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), card);
+        }
     }
 
     @RequestMapping(value = "/to-bf", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

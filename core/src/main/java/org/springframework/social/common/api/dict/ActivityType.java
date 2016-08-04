@@ -46,4 +46,8 @@ public enum ActivityType {
     public String getRealType() {
         return realType;
     }
+
+    public boolean isPing(){
+        return this == ping;
+    }
 }
