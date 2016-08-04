@@ -23,7 +23,7 @@ public enum ActivityType {
     contactRelationUpdate("activity/contactRelationUpdate"),
     conversationUpdate("activity/conversationUpdate"),
     typing("activity/typing"),
-    ping("activity/ping"),
+    ping("ping"),
     deleteUserData("activity/deleteUserData"),
     card("message/card.carousel");
 
