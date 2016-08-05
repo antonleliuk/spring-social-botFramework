@@ -27,8 +27,6 @@ public class ConnectorClientTemplate extends AbstractOAuth2ApiBinding implements
 
     private BotFrameworkOperations botFrameworkOperations;
 
-    private final LoggingClientHttpRequestInterceptor loggingInterceptor = new LoggingClientHttpRequestInterceptor();
-
     public ConnectorClientTemplate(String accessToken, String skypeUrl, String apiVersion) {
         super(accessToken);
         this.skypeUrl = skypeUrl;
@@ -60,7 +58,7 @@ public class ConnectorClientTemplate extends AbstractOAuth2ApiBinding implements
 
     @Override
     protected void configureRestTemplate(RestTemplate restTemplate) {
-        restTemplate.getInterceptors().add(loggingInterceptor);
+        restTemplate.getInterceptors().add(new LoggingClientHttpRequestInterceptor());
     }
 
     private class LoggingClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
