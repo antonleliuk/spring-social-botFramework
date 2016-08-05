@@ -9,11 +9,13 @@ import org.springframework.http.MediaType;
 import org.springframework.social.botFramework.api.data.to.Activity;
 import org.springframework.social.botFramework.api.data.to.Attachment;
 import org.springframework.social.botFramework.api.data.to.ChannelAccount;
+import org.springframework.social.botFramework.api.data.to.cards.CardAction;
 import org.springframework.social.botFramework.api.data.to.cards.CardImage;
 import org.springframework.social.botFramework.api.data.to.cards.HeroCard;
 import org.springframework.social.botFramework.api.data.to.cards.SignInCard;
 import org.springframework.social.common.api.ConnectorClient;
 import org.springframework.social.common.api.dict.ActivityType;
+import org.springframework.social.common.api.dict.CardActionType;
 import org.springframework.social.common.api.dict.TextFormat;
 import org.springframework.social.skypeBot.api.data.to.Message;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,22 +70,40 @@ public class EchoController {
             card.setTextFormat(TextFormat.xml);
             HeroCard hc = new HeroCard();
             hc.setTitle("Hotel Radisson Blu Hotel at Disneyland (r) Paris.");
-            hc.setSubtitle("<a href=\"https://disney.radisson.com\">$71 Today up to 27% off</a><br>Booked in the last 2 hours");
+            hc.setSubtitle("Booked in the last 2 hours");
             hc.setText("Disneyland paris. 40 Aliee De la Mare dian Houleuse, Magny-le-Hongre, Seine-Marne.");
             CardImage ci = new CardImage();
             ci.setUrl("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg");
             ci.setAlt("hello thumb");
+            CardAction tap = new CardAction();
+            tap.setType(CardActionType.openUrl);
+            tap.setValue("https://en.wikipedia.org/wiki/Space_Needle");
+            tap.setTitle("open");
+            ci.setTap(tap);
             hc.getImages().add(ci);
+
+            CardAction button = new CardAction();
+            button.setTitle("Select");
+            button.setValue("select:102");
+            button.setType(CardActionType.imBack);
+            hc.getButtons().add(button);
+
 
             Attachment<HeroCard> a = new Attachment<>();
             a.setContent(hc);
             a.setContentType(hc.getCardType().getType());
-//            card.addAttachment(a);
+            card.addAttachment(a);
 
             SignInCard sc = new SignInCard();
             sc.setTitle("Sign title");
             sc.setText("Some text");
             sc.setSubtitle("Some subtitle");
+
+            CardAction signInButton = new CardAction();
+            signInButton.setTitle("signin");
+            signInButton.setType(CardActionType.signin);
+            signInButton.setValue("https://profitsoft.ua/uathesystem");
+            sc.getButtons().add(signInButton);
             Attachment<SignInCard> sa = new Attachment<>();
             sa.setContent(sc);
             sa.setContentType(sc.getCardType().getType());

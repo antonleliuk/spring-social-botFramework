@@ -5,5 +5,5 @@ package org.springframework.social.common.api.dict;
  */
 public enum CardActionType {
 
-    openUrl, imBack, postBack, playAudio, playVideo, showImage, downloadFile
+    openUrl, imBack, postBack, playAudio, playVideo, showImage, downloadFile, signin
 }
