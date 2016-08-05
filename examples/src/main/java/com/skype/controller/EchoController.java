@@ -1,7 +1,5 @@
 package com.skype.controller;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.social.botFramework.api.data.to.cards.HeroCard;
 import org.springframework.social.botFramework.api.data.to.cards.SignInCard;
 import org.springframework.social.common.api.ConnectorClient;
 import org.springframework.social.common.api.dict.ActivityType;
+import org.springframework.social.common.api.dict.AttachmentLayout;
 import org.springframework.social.common.api.dict.CardActionType;
 import org.springframework.social.common.api.dict.TextFormat;
 import org.springframework.social.skypeBot.api.data.to.Message;
@@ -48,15 +47,6 @@ public class EchoController {
 
     @RequestMapping(value = "/bf-chat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void botFrameworkChat(@RequestBody Activity from){
-        try {
-            StringWriter sw = new StringWriter();
-            objectMapper.writer().writeValue(sw, from);
-            System.out.println("Incoming message ------------");
-            System.out.println(sw.toString());
-            System.out.println("Incoming message ------------");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         if(!from.getActivity().isPing()){
             Activity replay = from.createReplay();
             replay.setType(ActivityType.text_message);
@@ -64,6 +54,7 @@ public class EchoController {
             connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), replay);
 
             Activity card = from.createReplay();
+            card.setAttachmentLayout(AttachmentLayout.list);
             card.setType(ActivityType.card);
             card.setText("Simple card");
             card.setSummary("Summary of the card");

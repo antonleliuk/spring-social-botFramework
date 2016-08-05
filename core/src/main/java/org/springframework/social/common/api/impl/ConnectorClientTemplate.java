@@ -1,5 +1,11 @@
 package org.springframework.social.common.api.impl;
 
+import java.io.IOException;
+
+import org.springframework.http.HttpRequest;
+import org.springframework.http.client.ClientHttpRequestExecution;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.botFramework.api.BotFrameworkOperations;
 import org.springframework.social.botFramework.api.impl.BotFrameworkTemplate;
 import org.springframework.social.common.api.ConnectorClient;
@@ -20,6 +26,8 @@ public class ConnectorClientTemplate extends AbstractOAuth2ApiBinding implements
     private SkypeBotOperations skypeBotOperations;
 
     private BotFrameworkOperations botFrameworkOperations;
+
+    private final LoggingClientHttpRequestInterceptor loggingInterceptor = new LoggingClientHttpRequestInterceptor();
 
     public ConnectorClientTemplate(String accessToken, String skypeUrl, String apiVersion) {
         super(accessToken);
@@ -52,15 +60,21 @@ public class ConnectorClientTemplate extends AbstractOAuth2ApiBinding implements
 
     @Override
     protected void configureRestTemplate(RestTemplate restTemplate) {
-//        restTemplate.getInterceptors().add((request, body, execution) -> {
-//            StringBuilder sb = new StringBuilder(System.lineSeparator())
-//                    .append("-------------------").append(System.lineSeparator())
-//                    .append("URL = ").append(request.getURI()).append(System.lineSeparator())
-//                    .append("Headers = ").append(request.getHeaders()).append(System.lineSeparator())
-//                    .append("Body = ").append(new String(body)).append(System.lineSeparator())
-//                    .append("-------------------");
-//            System.out.println(sb);
-//            return execution.execute(request, body);
-//        });
+        restTemplate.getInterceptors().add(loggingInterceptor);
+    }
+
+    private class LoggingClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
+
+        @Override
+        public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
+            StringBuilder sb = new StringBuilder(System.lineSeparator())
+                    .append("-------------------").append(System.lineSeparator())
+                    .append("URL = ").append(request.getURI()).append(System.lineSeparator())
+                    .append("Headers = ").append(request.getHeaders()).append(System.lineSeparator())
+                    .append("Body = ").append(new String(body)).append(System.lineSeparator())
+                    .append("-------------------");
+            System.out.println(sb);
+            return execution.execute(request, body);
+        }
     }
 }
