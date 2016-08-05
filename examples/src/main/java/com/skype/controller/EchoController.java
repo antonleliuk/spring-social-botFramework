@@ -59,6 +59,7 @@ public class EchoController {
             card.setText("Simple card");
             card.setSummary("Summary of the card");
             card.setTextFormat(TextFormat.xml);
+
             HeroCard hc = new HeroCard();
             hc.setTitle("Hotel Radisson Blu Hotel at Disneyland (r) Paris.");
             hc.setSubtitle("Booked in the last 2 hours");
@@ -83,7 +84,7 @@ public class EchoController {
             Attachment<HeroCard> a = new Attachment<>();
             a.setContent(hc);
             a.setContentType(hc.getCardType().getType());
-//            card.addAttachment(a);
+            card.addAttachment(a);
 
             SignInCard sc = new SignInCard();
             sc.setTitle("Sign title");
