@@ -91,7 +91,7 @@ public class EchoController {
             CardAction signInButton = new CardAction();
             signInButton.setTitle("signin");
             signInButton.setType(CardActionType.signin);
-            signInButton.setValue("http://localhost:8080/signIn");
+            signInButton.setValue("https://profitsoft.ua/uathesystem");
             sc.getButtons().add(signInButton);
             Attachment<SignInCard> sa = new Attachment<>();
             sa.setContent(sc);
