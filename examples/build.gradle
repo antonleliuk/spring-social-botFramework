@@ -10,10 +10,16 @@ buildscript {
 }
 
 dependencies {
-    compile project(":core")
+    compile project(":botFramework")
     compile project(":boot")
-    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
-    testCompile group: "org.springframework.boot", name: "spring-boot-starter-test", version: "$springBootVersion"
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
+        exclude module: "spring-boot-starter-logging"
+    }
+    compile("org.springframework.boot:spring-boot-starter-log4j2:$springBootVersion")
+    compile("com.github.isrsal:spring-mvc-logger:0.2"){
+        exclude module: "servlet-api"
+    }
+//    testCompile group: "org.springframework.boot", name: "spring-boot-starter-test", version: "$springBootVersion"
 }
 
 task stage(dependsOn: build)

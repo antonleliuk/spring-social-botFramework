@@ -1,2 +1,2 @@
-include "core", "boot", "examples"
+include "boot", "botFramework", "examples"
 

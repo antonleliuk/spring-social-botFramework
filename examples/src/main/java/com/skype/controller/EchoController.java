@@ -1,27 +1,26 @@
 package com.skype.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.social.botFramework.api.BotFramework;
 import org.springframework.social.botFramework.api.data.to.Activity;
 import org.springframework.social.botFramework.api.data.to.Attachment;
-import org.springframework.social.botFramework.api.data.to.ChannelAccount;
 import org.springframework.social.botFramework.api.data.to.cards.CardAction;
 import org.springframework.social.botFramework.api.data.to.cards.CardImage;
+import org.springframework.social.botFramework.api.data.to.cards.Fact;
 import org.springframework.social.botFramework.api.data.to.cards.HeroCard;
+import org.springframework.social.botFramework.api.data.to.cards.ReceiptCard;
+import org.springframework.social.botFramework.api.data.to.cards.ReceiptItem;
 import org.springframework.social.botFramework.api.data.to.cards.SignInCard;
-import org.springframework.social.common.api.ConnectorClient;
-import org.springframework.social.common.api.dict.ActivityType;
-import org.springframework.social.common.api.dict.AttachmentLayout;
-import org.springframework.social.common.api.dict.CardActionType;
-import org.springframework.social.common.api.dict.TextFormat;
-import org.springframework.social.skypeBot.api.data.to.Message;
+import org.springframework.social.botFramework.api.data.to.cards.ThumbnailCard;
+import org.springframework.social.botFramework.api.dict.ActivityType;
+import org.springframework.social.botFramework.api.dict.AttachmentLayout;
+import org.springframework.social.botFramework.api.dict.CardActionType;
+import org.springframework.social.botFramework.api.dict.TextFormat;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Anton Leliuk
@@ -30,19 +29,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EchoController {
 
     @Autowired
-    private ConnectorClient connectorClient;
+    private BotFramework botFramework;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @RequestMapping(value = "/chat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void chat(@RequestBody List<org.springframework.social.skypeBot.api.data.from.Message> messages){
-        for (org.springframework.social.skypeBot.api.data.from.Message message : messages) {
-            Message toSkype = new Message();
-            toSkype.setContent(message.getContent());
-            System.out.println(message.getContent());
-            connectorClient.getSkypeBotOperations().sendMessage(message.getFrom(), toSkype);
-        }
+    @RequestMapping(value = "/signIn")
+    public void signIn(){
     }
 
     @RequestMapping(value = "/bf-chat", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -51,10 +41,10 @@ public class EchoController {
             Activity replay = from.createReplay();
             replay.setType(ActivityType.text_message);
             replay.setText(from.getText());
-            connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), replay);
+            botFramework.replyToActivity(replay.getRecipient().getId(), replay);
 
             Activity card = from.createReplay();
-            card.setAttachmentLayout(AttachmentLayout.list);
+            card.setAttachmentLayout(AttachmentLayout.carousel);
             card.setType(ActivityType.card);
             card.setText("Simple card");
             card.setSummary("Summary of the card");
@@ -80,7 +70,6 @@ public class EchoController {
             button.setType(CardActionType.imBack);
             hc.getButtons().add(button);
 
-
             Attachment<HeroCard> a = new Attachment<>();
             a.setContent(hc);
             a.setContentType(hc.getCardType().getType());
@@ -94,41 +83,57 @@ public class EchoController {
             CardAction signInButton = new CardAction();
             signInButton.setTitle("signin");
             signInButton.setType(CardActionType.signin);
-            signInButton.setValue("https://profitsoft.ua/uathesystem");
+            signInButton.setValue("http://localhost:8080/signIn");
             sc.getButtons().add(signInButton);
             Attachment<SignInCard> sa = new Attachment<>();
             sa.setContent(sc);
             sa.setContentType(sc.getCardType().getType());
             card.addAttachment(sa);
-            connectorClient.getBotFrameworkOperations().sendMessage(replay.getRecipient().getId(), card);
+
+            ThumbnailCard tc = new ThumbnailCard();
+            tc.setTitle("Title");
+            tc.setText("Text");
+            tc.setSubtitle("Sub title");
+
+            CardAction tcButton = new CardAction();
+            tcButton.setType(CardActionType.openUrl);
+            tcButton.setTitle("view");
+            tcButton.setValue("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg");
+            tc.getButtons().add(tcButton);
+
+            Attachment<ThumbnailCard> ta = new Attachment<>();
+            ta.setContent(tc);
+            ta.setContentType(tc.getCardType().getType());
+            card.addAttachment(ta);
+
+            ReceiptCard rc = new ReceiptCard();
+            rc.setTitle("Title");
+            rc.setText("Text");
+            rc.setSubtitle("Sub title");
+
+            Fact f = new Fact();
+            f.setKey("Some key");
+            f.setValue("Some value");
+            rc.getFacts().add(f);
+
+            ReceiptItem ri = new ReceiptItem();
+            CardImage rci = new CardImage();
+            rci.setUrl("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg");
+            rci.setAlt("alt text");
+            ri.setImage(rci);
+            ri.setQuantity(1);
+            ri.setPrice("100 uah");
+            rc.getItems().add(ri);
+            rc.setTax("TAX: 150 uah");
+            rc.setVat("VAT: 200 uah");
+            rc.setTotal("TOTAL: 350 uah");
+
+            Attachment<ReceiptCard> ra = new Attachment<>();
+            ra.setContent(rc);
+            ra.setContentType(rc.getCardType().getType());
+            card.addAttachment(ra);
+
+            botFramework.replyToActivity(replay.getRecipient().getId(), card);
         }
     }
-
-    @RequestMapping(value = "/to-bf", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void sendMessageToBotFramework(){
-        Activity activity = new Activity();
-        activity.setType(ActivityType.text_message);
-        activity.setServiceUrl("https://skype.botframework.com");
-        activity.setChannelId("skype");
-        ChannelAccount recipient = new ChannelAccount();
-        recipient.setId("29:10F8FhTcEHm8uNsUxCPZeFF7ST3MkUq-CjjWSH62DKZY");
-        recipient.setName("Anton Leliuk");
-        activity.setRecipient(recipient);
-        ChannelAccount from = new ChannelAccount();
-        from.setName("SystemActivityMonitor");
-        from.setId("28:1a239996-a170-4c7f-9bd4-6502ec582f5e");
-        activity.setFrom(from);
-        activity.setText("Hello from BotFramework");
-        Object o = connectorClient.getBotFrameworkOperations().sendMessage("29:10F8FhTcEHm8uNsUxCPZeFF7ST3MkUq-CjjWSH62DKZY", activity);
-    }
-
-//    @RequestMapping(value = "/chat/attachment/{skypeId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public void attachment(@PathVariable("skypeId") String skypeId){
-//        Attachment attachment = new Attachment();
-//        attachment.setType(AttachmentType.Image);
-//        attachment.setName("testPicture");
-//        attachment.setOriginalBase64();
-//        attachment.setThumbnailBase64();
-//        skypeBot.sendAttachment(skypeId, attachment);
-//    }
 }
