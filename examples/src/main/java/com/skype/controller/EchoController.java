@@ -74,6 +74,14 @@ public class EchoController {
             a.setContent(hc);
             a.setContentType(hc.getCardType().getType());
             card.addAttachment(a);
+            botFramework.replyToActivity(replay.getRecipient().getId(), card);
+
+            card = from.createReplay();
+            card.setAttachmentLayout(AttachmentLayout.carousel);
+            card.setType(ActivityType.card);
+            card.setText("Simple signIn card");
+            card.setSummary("Summary of the signIn card");
+            card.setTextFormat(TextFormat.xml);
 
             SignInCard sc = new SignInCard();
             sc.setTitle("Sign title");
@@ -89,6 +97,14 @@ public class EchoController {
             sa.setContent(sc);
             sa.setContentType(sc.getCardType().getType());
             card.addAttachment(sa);
+            botFramework.replyToActivity(replay.getRecipient().getId(), card);
+
+            card = from.createReplay();
+            card.setAttachmentLayout(AttachmentLayout.carousel);
+            card.setType(ActivityType.card);
+            card.setText("Simple thumbnail card");
+            card.setSummary("Summary of the thumbnail card");
+            card.setTextFormat(TextFormat.xml);
 
             ThumbnailCard tc = new ThumbnailCard();
             tc.setTitle("Title");
@@ -105,6 +121,14 @@ public class EchoController {
             ta.setContent(tc);
             ta.setContentType(tc.getCardType().getType());
             card.addAttachment(ta);
+            botFramework.replyToActivity(replay.getRecipient().getId(), card);
+
+            card = from.createReplay();
+            card.setAttachmentLayout(AttachmentLayout.carousel);
+            card.setType(ActivityType.card);
+            card.setText("Simple receipt card");
+            card.setSummary("Summary of the receipt card");
+            card.setTextFormat(TextFormat.xml);
 
             ReceiptCard rc = new ReceiptCard();
             rc.setTitle("Title");
