@@ -2,7 +2,10 @@ package org.springframework.social.botFramework.api.impl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -39,8 +42,7 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
 
     @Override
     public AttachmentInfo getAttachmentInfo(String attachmentId) {
-//        /v3/attachments/{attachmentId}
-        return null;
+        return getRestTemplate().getForObject(getMainUrl().pathSegment("attachments", attachmentId).toUriString(), AttachmentInfo.class);
     }
 
     @Override
@@ -50,17 +52,28 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
 
     @Override
     public List<ChannelAccount> listActivityMembers(String conversationId, String activityId) {
-        return null;
+        return getRestTemplate().exchange(
+                buildConversationUrl(conversationId).pathSegment("activities", activityId, "members").toUriString(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ChannelAccount>>() {
+                })
+                .getBody();
     }
 
     @Override
     public List<ChannelAccount> listConversationMembers(String conversationId) {
-        return null;
+        return getRestTemplate().exchange(
+                buildConversationUrl(conversationId).pathSegment("members").toUriString(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ChannelAccount>>() {})
+                .getBody();
     }
 
     @Override
-    public void replyToActivity(String conversationId, Activity activity) {
-        getRestTemplate().postForLocation(buildConversationUrl(conversationId).path("activities").toUriString(), activity);
+    public void replyToActivity(String conversationId, String activityId, Activity activity) {
+        getRestTemplate().postForLocation(buildConversationUrl(conversationId).pathSegment("activities", activityId).toUriString(), activity);
     }
 
     @Override
@@ -70,18 +83,17 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
 
     @Override
     public ResourceResponse uploadAttachment(String conversationId, AttachmentData attachmentUpload) {
-        return null;
+        return getRestTemplate().postForObject(
+                buildConversationUrl(conversationId).pathSegment("attachments").toUriString(),
+                attachmentUpload,
+                ResourceResponse.class);
     }
 
     @Override
     protected void configureRestTemplate(RestTemplate restTemplate) {
+        restTemplate.getInterceptors().add(new ContextIdHttpRequestInterceptor());
         restTemplate.getInterceptors().add(new LoggingClientHttpRequestInterceptor());
     }
-
-//    @Override
-//    public Object sendMessage(String recipient, Activity activity) {
-//        return getRestTemplate().postForObject(buildConversationUrl(recipient).path("activities").toUriString(), activity, Object.class);
-//    }
 
     private UriComponentsBuilder buildConversationUrl(String skypeId){
         return getMainUrl().pathSegment("conversations", skypeId);
@@ -102,6 +114,15 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
                     .append("Body = ").append(new String(body)).append(System.lineSeparator())
                     .append("-------------------");
             System.out.println(sb);
+            return execution.execute(request, body);
+        }
+    }
+
+    private class ContextIdHttpRequestInterceptor implements ClientHttpRequestInterceptor {
+
+        @Override
+        public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
+            request.getHeaders().add("ContextId", UUID.randomUUID().toString());
             return execution.execute(request, body);
         }
     }

@@ -41,7 +41,7 @@ public class EchoController {
             Activity replay = from.createReplay();
             replay.setType(ActivityType.text_message);
             replay.setText(from.getText());
-            botFramework.replyToActivity(replay.getRecipient().getId(), replay);
+            botFramework.sendToConversation(replay.getRecipient().getId(), replay);
 
             Activity card = from.createReplay();
             card.setAttachmentLayout(AttachmentLayout.carousel);
@@ -74,7 +74,7 @@ public class EchoController {
             a.setContent(hc);
             a.setContentType(hc.getCardType().getType());
             card.addAttachment(a);
-            botFramework.replyToActivity(replay.getRecipient().getId(), card);
+            botFramework.sendToConversation(card.getRecipient().getId(), card);
 
             card = from.createReplay();
             card.setAttachmentLayout(AttachmentLayout.carousel);
@@ -97,7 +97,7 @@ public class EchoController {
             sa.setContent(sc);
             sa.setContentType(sc.getCardType().getType());
             card.addAttachment(sa);
-            botFramework.replyToActivity(replay.getRecipient().getId(), card);
+            botFramework.sendToConversation(card.getRecipient().getId(), card);
 
             card = from.createReplay();
             card.setAttachmentLayout(AttachmentLayout.carousel);
@@ -121,7 +121,7 @@ public class EchoController {
             ta.setContent(tc);
             ta.setContentType(tc.getCardType().getType());
             card.addAttachment(ta);
-            botFramework.replyToActivity(replay.getRecipient().getId(), card);
+            botFramework.sendToConversation(card.getRecipient().getId(), card);
 
             card = from.createReplay();
             card.setAttachmentLayout(AttachmentLayout.carousel);
@@ -157,7 +157,7 @@ public class EchoController {
             ra.setContentType(rc.getCardType().getType());
             card.addAttachment(ra);
 
-            botFramework.replyToActivity(replay.getRecipient().getId(), card);
+            botFramework.replyToActivity(card.getConversation().getId(), from.getId(), card);
         }
     }
 }

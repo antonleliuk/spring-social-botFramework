@@ -5,7 +5,6 @@ import org.springframework.social.botFramework.api.dict.ActivityType;
 /**
  * @author Anton Leliuk
  */
-
 public abstract class BaseMessage {
 
     /**
@@ -20,4 +19,11 @@ public abstract class BaseMessage {
      */
     public abstract ActivityType getActivity();
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

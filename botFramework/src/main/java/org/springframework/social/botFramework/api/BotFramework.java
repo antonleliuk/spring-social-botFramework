@@ -41,7 +41,7 @@ public interface BotFramework extends ApiBinding {
      * @param conversationId conversation id
      * @param activityId activity if
      */
-    List<ChannelAccount> listActivityMembers(String conversationId, String activityId);
+    List listActivityMembers(String conversationId, String activityId);
 
     /**
      * Call this method to enumerate the members of a conversation
@@ -52,9 +52,10 @@ public interface BotFramework extends ApiBinding {
     /**
      * Reply on a conversation
      * @param conversationId conversation id
+     * @param activityId
      * @param activity
      */
-    void replyToActivity(String conversationId, Activity activity);
+    void replyToActivity(String conversationId, String activityId, Activity activity);
 
     /**
      * This method allows you to upload an attachment directly into a channels blob storage.
