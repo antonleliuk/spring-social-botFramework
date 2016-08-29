@@ -1,1 +1,1 @@
-# spring-social-skypeBot
+# Spring social integration with Microsoft BotFramework

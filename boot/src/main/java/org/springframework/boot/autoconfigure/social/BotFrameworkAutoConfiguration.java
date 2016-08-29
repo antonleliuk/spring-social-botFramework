@@ -15,6 +15,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.botFramework.api.BotFramework;
 import org.springframework.social.botFramework.connect.BotFrameworkConnectionFactory;
+import org.springframework.social.botFramework.service.BotService;
+import org.springframework.social.botFramework.service.impl.BotServiceImpl;
 import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
@@ -54,16 +56,16 @@ public class BotFrameworkAutoConfiguration {
 
         @Bean
         @ConditionalOnMissingBean(BotFramework.class)
-        public BotFramework skypeBot(ConnectionRepository repository, BotFrameworkConnectionFactory connectionFactory){
-            Connection<BotFramework> skypeBot = repository.findPrimaryConnection(BotFramework.class);
-            if (skypeBot == null) {
+        public BotFramework botFramework(ConnectionRepository repository, BotFrameworkConnectionFactory connectionFactory){
+            Connection<BotFramework> botFrameworkConnection = repository.findPrimaryConnection(BotFramework.class);
+            if (botFrameworkConnection == null) {
                 AccessGrant accessGrant = connectionFactory.getOAuthOperations().authenticateClient(properties.getScope());
                 Connection<BotFramework> connection = connectionFactory.createConnection(accessGrant);
                 repository.addConnection(connection);
-                skypeBot = repository.findPrimaryConnection(BotFramework.class);
-                assert skypeBot != null;
+                botFrameworkConnection = repository.findPrimaryConnection(BotFramework.class);
+                assert botFrameworkConnection != null;
             }
-            return skypeBot.getApi();
+            return botFrameworkConnection.getApi();
         }
 
         @Bean
@@ -74,6 +76,11 @@ public class BotFrameworkAutoConfiguration {
         @Bean
         public BotFrameworkConnectionFactory botFrameworkConnectionFactory(){
             return new BotFrameworkConnectionFactory(properties.getAppId(), properties.getAppSecret(), properties.getAuthUrl(), properties.getSkypeUrl(), properties.getApiVersion());
+        }
+
+        @Bean
+        public BotService botService(){
+            return new BotServiceImpl();
         }
     }
 }

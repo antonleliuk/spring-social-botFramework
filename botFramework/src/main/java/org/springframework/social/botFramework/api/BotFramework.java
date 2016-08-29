@@ -3,19 +3,17 @@ package org.springframework.social.botFramework.api;
 import java.util.List;
 
 import org.springframework.social.ApiBinding;
-import org.springframework.social.botFramework.api.data.to.Activity;
-import org.springframework.social.botFramework.api.data.to.AttachmentData;
-import org.springframework.social.botFramework.api.data.to.AttachmentInfo;
-import org.springframework.social.botFramework.api.data.to.ChannelAccount;
-import org.springframework.social.botFramework.api.data.to.ConversationParameters;
-import org.springframework.social.botFramework.api.data.to.ResourceResponse;
+import org.springframework.social.botFramework.api.data.Activity;
+import org.springframework.social.botFramework.api.data.AttachmentData;
+import org.springframework.social.botFramework.api.data.AttachmentInfo;
+import org.springframework.social.botFramework.api.data.ChannelAccount;
+import org.springframework.social.botFramework.api.data.ConversationParameters;
+import org.springframework.social.botFramework.api.data.ResourceResponse;
 
 /**
  * @author Anton Leliuk
  */
 public interface BotFramework extends ApiBinding {
-
-//    Object sendMessage(String recipient, Activity activity);
 
     /**
      * Get the named view as binary content

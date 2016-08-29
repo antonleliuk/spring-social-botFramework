@@ -16,12 +16,6 @@ subprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile("org.springframework.social:spring-social-core:$springSocialVersion"){
             transitive = false
-//            exclude module: "spring-core"
-//            exclude module: "spring-aop"
-//            exclude module: "spring-beans"
-//            exclude module: "spring-context"
-//            exclude module: "spring-expression"
-//            exclude module: "spring-web"
         }
         compile("org.springframework.social:spring-social-config:$springSocialVersion"){
             transitive = false
@@ -29,10 +23,10 @@ subprojects {
         compile("org.springframework.social:spring-social-security:$springSocialVersion"){
             transitive = false
         }
-        compile group: "org.springframework.security", name: "spring-security-core", version: "$springSecurityVersion"
-//        runtime("org.springframework.social:spring-social-twitter:1.1.2.RELEASE")
-//        runtime("org.springframework.social:spring-social-facebook:2.0.3.RELEASE")
-//        compile "org.springframework.security.oauth:spring-security-oauth2:$springSecurityOAuth2Version"
+        compile ("org.springframework.security:spring-security-core:$springSecurityVersion")
+        compile ("io.projectreactor:reactor-bus:$reactorVersion")
+        compile ("io.projectreactor:reactor-stream:$reactorVersion")
+        compile ("org.projectreactor:reactor-spring:$reactorSpringVersion")
     }
 
 }
