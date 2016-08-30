@@ -7,5 +7,5 @@ import org.springframework.social.botFramework.api.data.Activity;
  */
 public interface BotService {
 
-    void replyOn(Activity activity);
+    void reply(Activity activity);
 }

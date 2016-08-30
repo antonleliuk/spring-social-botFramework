@@ -25,7 +25,7 @@ public class BotServiceImpl implements BotService {
         definitions.parallelStream().forEach(d -> eventBus.on(d.getSelector(), d.getConsumer()));
     }
 
-    public void replyOn(Activity activity){
+    public void reply(Activity activity){
         eventBus.notify(activity.getType(), Event.wrap(activity));
     }
 }

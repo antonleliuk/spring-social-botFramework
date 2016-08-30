@@ -130,6 +130,11 @@ public class Activity extends BaseBotFrameworkMessage {
         return this;
     }
 
+    public Activity typing(){
+        type = ActivityType.typing;
+        return this;
+    }
+
     public String getAction() {
         return action;
     }

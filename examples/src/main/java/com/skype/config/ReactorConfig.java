@@ -2,6 +2,7 @@ package com.skype.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.social.botFramework.api.dict.ActivityType;
 import org.springframework.social.botFramework.reactor.BotFrameworkConsumerDefinition;
 import org.springframework.social.botFramework.reactor.consumer.ExceptionConsumer;
@@ -41,6 +42,7 @@ public class ReactorConfig {
     }
 
     @Bean
+    @Order(0)
     public BotFrameworkConsumerDefinition<ActivityByTypeSelector, TypingActivityConsumer> typingActivityDefinition(){
         return new BotFrameworkConsumerDefinition(new ActivityByTypeSelector(ActivityType.message), typingActivityConsumer());
     }
@@ -51,6 +53,7 @@ public class ReactorConfig {
     }
 
     @Bean
+    @Order(1)
     public BotFrameworkConsumerDefinition<ActivityByTypeSelector, MessageActivityConsumer> messageActivityDefinition(){
         return new BotFrameworkConsumerDefinition(new ActivityByTypeSelector(ActivityType.message), messageActivityConsumer());
     }
