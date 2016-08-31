@@ -48,7 +48,7 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
 
         hc.addButton(new CardAction().title("Select").value("select:102").type(CardActionType.imBack));
 
-        card.addAttachment(new Attachment<HeroCard>().content(hc).contentType(hc.getCardType().getType()));
+        card.addAttachment(hc.toAttachment());
         botFramework.sendToConversation(card.getRecipient().getId(), card);
 
         card = activity.createReplay();

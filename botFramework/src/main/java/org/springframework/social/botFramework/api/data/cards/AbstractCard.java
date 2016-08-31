@@ -3,6 +3,7 @@ package org.springframework.social.botFramework.api.data.cards;
 import org.springframework.social.botFramework.api.data.Attachment;
 import org.springframework.social.botFramework.api.json.CardTypeSerializer;
 import org.springframework.social.botFramework.api.dict.CardType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -44,6 +45,7 @@ public abstract class AbstractCard {
         return (C)this;
     }
 
+    @JsonIgnore
     public <C extends AbstractCard> Attachment<C> toAttachment(){
         return new Attachment<C>().content((C) this).contentType(getCardType().getType());
     }
