@@ -20,6 +20,21 @@ public class CardImage {
      */
     private String url;
 
+    public CardImage alt(String alt){
+        this.alt = alt;
+        return this;
+    }
+
+    public CardImage tap(CardAction tap){
+        this.tap = tap;
+        return this;
+    }
+
+    public CardImage url(String url){
+        this.url = url;
+        return this;
+    }
+
     public String getAlt() {
         return alt;
     }

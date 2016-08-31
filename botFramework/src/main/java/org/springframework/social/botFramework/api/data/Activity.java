@@ -1,13 +1,13 @@
 package org.springframework.social.botFramework.api.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.social.botFramework.api.json.ActivityTypeDeserializer;
-import org.springframework.social.botFramework.api.json.ActivityTypeSerializer;
 import org.springframework.social.botFramework.api.dict.ActivityType;
 import org.springframework.social.botFramework.api.dict.AttachmentLayout;
 import org.springframework.social.botFramework.api.dict.TextFormat;
+import org.springframework.social.botFramework.api.json.ActivityTypeDeserializer;
+import org.springframework.social.botFramework.api.json.ActivityTypeSerializer;
+import org.springframework.social.botFramework.util.CollectionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -123,15 +123,42 @@ public class Activity extends BaseBotFrameworkMessage {
     }
 
     public <C>Activity addAttachment(Attachment<C> attachment){
-        if(attachments == null){
-            attachments = new ArrayList<>();
-        }
-        attachments.add(attachment);
+        CollectionUtils.add(attachments, attachment);
         return this;
     }
 
     public Activity typing(){
-        type = ActivityType.typing;
+        this.type = ActivityType.typing;
+        return this;
+    }
+
+    public Activity textMessage(String text){
+        this.type = ActivityType.text_message;
+        return text(text);
+    }
+
+    public Activity card(){
+        this.type = ActivityType.card;
+        return this;
+    }
+
+    public Activity attachmentLayout(AttachmentLayout layout){
+        this.attachmentLayout = layout;
+        return this;
+    }
+
+    public Activity text(String text){
+        this.text = text;
+        return this;
+    }
+
+    public Activity summary(String summary){
+        this.summary = summary;
+        return this;
+    }
+
+    public Activity textFormat(TextFormat format){
+        this.textFormat = format;
         return this;
     }
 

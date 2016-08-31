@@ -23,42 +23,32 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
 
     @Override
     protected void acceptInternal(Activity activity) {
-        Activity replay = activity.createReplay();
-        replay.setType(ActivityType.text_message);
-        replay.setText(activity.getText());
+        Activity replay = activity.createReplay().textMessage(activity.getText());
         botFramework.sendToConversation(replay.getRecipient().getId(), replay);
 
-        Activity card = activity.createReplay();
-        card.setAttachmentLayout(AttachmentLayout.carousel);
-        card.setType(ActivityType.card);
-        card.setText("Simple card");
-        card.setSummary("Summary of the card");
-        card.setTextFormat(TextFormat.xml);
+        Activity card = activity.createReplay()
+                .card()
+                .attachmentLayout(AttachmentLayout.carousel)
+                .text("Simple card")
+                .summary("Summary of the card")
+                .textFormat(TextFormat.xml);
 
-        HeroCard hc = new HeroCard();
-        hc.setTitle("Hotel Radisson Blu Hotel at Disneyland (r) Paris.");
-        hc.setSubtitle("Booked in the last 2 hours");
-        hc.setText("Disneyland paris. 40 Aliee De la Mare dian Houleuse, Magny-le-Hongre, Seine-Marne.");
-        CardImage ci = new CardImage();
-        ci.setUrl("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg");
-        ci.setAlt("hello thumb");
-        CardAction tap = new CardAction();
-        tap.setType(CardActionType.openUrl);
-        tap.setValue("https://en.wikipedia.org/wiki/Space_Needle");
-        tap.setTitle("open");
-        ci.setTap(tap);
-        hc.getImages().add(ci);
+        HeroCard hc = new HeroCard()
+                .title("Hotel Radisson Blu Hotel at Disneyland (r) Paris.")
+                .subTitle("Booked in the last 2 hours")
+                .text("Disneyland paris. 40 Aliee De la Mare dian Houleuse, Magny-le-Hongre, Seine-Marne.");
+        CardImage ci = new CardImage()
+                .url("https://pp.vk.me/c7011/v7011856/29c82/BvJogtnQIfE.jpg")
+                .alt("hello thumb")
+                .tap(new CardAction()
+                        .type(CardActionType.openUrl)
+                        .value("https://en.wikipedia.org/wiki/Space_Needle")
+                        .title("open"));
+        hc.addImage(ci);
 
-        CardAction button = new CardAction();
-        button.setTitle("Select");
-        button.setValue("select:102");
-        button.setType(CardActionType.imBack);
-        hc.getButtons().add(button);
+        hc.addButton(new CardAction().title("Select").value("select:102").type(CardActionType.imBack));
 
-        Attachment<HeroCard> a = new Attachment<>();
-        a.setContent(hc);
-        a.setContentType(hc.getCardType().getType());
-        card.addAttachment(a);
+        card.addAttachment(new Attachment<HeroCard>().content(hc).contentType(hc.getCardType().getType()));
         botFramework.sendToConversation(card.getRecipient().getId(), card);
 
         card = activity.createReplay();
@@ -71,7 +61,7 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
         SignInCard sc = new SignInCard();
         sc.setTitle("Sign title");
         sc.setText("Some text");
-        sc.setSubtitle("Some subtitle");
+        sc.setSubTitle("Some subtitle");
 
         CardAction signInButton = new CardAction();
         signInButton.setTitle("signin");
@@ -94,7 +84,7 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
         ThumbnailCard tc = new ThumbnailCard();
         tc.setTitle("Title");
         tc.setText("Text");
-        tc.setSubtitle("Sub title");
+        tc.setSubTitle("Sub title");
 
         CardAction tcButton = new CardAction();
         tcButton.setType(CardActionType.openUrl);
@@ -118,7 +108,7 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
         ReceiptCard rc = new ReceiptCard();
         rc.setTitle("Title");
         rc.setText("Text");
-        rc.setSubtitle("Sub title");
+        rc.setSubTitle("Sub title");
 
         Fact f = new Fact();
         f.setKey("Some key");

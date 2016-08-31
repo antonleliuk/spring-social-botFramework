@@ -30,6 +30,26 @@ public class CardAction {
      */
     private String value;
 
+    public CardAction image(String image){
+        this.image = image;
+        return this;
+    }
+
+    public CardAction title(String title){
+        this.title = title;
+        return this;
+    }
+
+    public CardAction type(CardActionType type){
+        this.type = type;
+        return this;
+    }
+
+    public CardAction value(String value){
+        this.value = value;
+        return this;
+    }
+
     public String getImage() {
         return image;
     }

@@ -1,8 +1,10 @@
 package org.springframework.social.botFramework.api.data.cards;
 
+import org.springframework.social.botFramework.api.data.Attachment;
 import org.springframework.social.botFramework.api.json.CardTypeSerializer;
 import org.springframework.social.botFramework.api.dict.CardType;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -14,7 +16,8 @@ public abstract class AbstractCard {
     /**
      * Subtitle of the card
      */
-    private String subtitle;
+    @JsonProperty("subtitle")
+    private String subTitle;
 
     /**
      * Text for the card (for sign-in request)
@@ -26,15 +29,34 @@ public abstract class AbstractCard {
      */
     private String title;
 
+    public <C extends AbstractCard> C title(String title){
+        this.title = title;
+        return (C)this;
+    }
+
+    public <C extends AbstractCard> C subTitle(String subTitle){
+        this.subTitle = subTitle;
+        return (C)this;
+    }
+
+    public <C extends AbstractCard> C text(String text){
+        this.text = text;
+        return (C)this;
+    }
+
+    public <C extends AbstractCard> Attachment<C> toAttachment(){
+        return new Attachment<C>().content((C) this).contentType(getCardType().getType());
+    }
+
     @JsonSerialize(using = CardTypeSerializer.class)
     public abstract CardType getCardType();
 
-    public String getSubtitle() {
-        return subtitle;
+    public String getSubTitle() {
+        return subTitle;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     public String getText() {
