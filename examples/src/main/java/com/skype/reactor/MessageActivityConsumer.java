@@ -113,7 +113,7 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
         ri.setImage(rci);
         ri.setQuantity(1);
         ri.setPrice("100 uah");
-        rc.getItems().add(ri);
+        rc.addItem(ri);
         rc.setTax("TAX: 150 uah");
         rc.setVat("VAT: 200 uah");
         rc.setTotal("TOTAL: 350 uah");
