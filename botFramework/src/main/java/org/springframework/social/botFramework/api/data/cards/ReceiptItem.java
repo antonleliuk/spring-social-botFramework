@@ -3,7 +3,7 @@ package org.springframework.social.botFramework.api.data.cards;
 /**
  * @author Anton Leliuk
  */
-public class ReceiptItem {
+public class ReceiptItem extends CardElement {
 
     private CardImage image;
 
@@ -18,24 +18,29 @@ public class ReceiptItem {
     private int quantity;
 
     /**
-     * Subtitle appears just below Title field, differs from Title in font styling only
-     */
-    private String subtitle;
-
-    /**
      * This action will be activated when user taps on the Item bubble.
      */
     private CardAction tap;
 
-    /**
-     * Text field appears just below subtitle, differs from Subtitle in font styling only
-     */
-    private String text;
+    public ReceiptItem image(CardImage image){
+        this.image = image;
+        return this;
+    }
 
-    /**
-     * Title of the card
-     */
-    private String title;
+    public ReceiptItem price(String price){
+        this.price = price;
+        return this;
+    }
+
+    public ReceiptItem quantity(int quantity){
+        this.quantity = quantity;
+        return this;
+    }
+
+    public ReceiptItem tap(CardAction tap){
+        this.tap = tap;
+        return this;
+    }
 
     public CardImage getImage() {
         return image;
@@ -61,14 +66,6 @@ public class ReceiptItem {
         this.quantity = quantity;
     }
 
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
     public CardAction getTap() {
         return tap;
     }
@@ -77,19 +74,4 @@ public class ReceiptItem {
         this.tap = tap;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

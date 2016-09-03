@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.social.botFramework.api.dict.CardType;
+import org.springframework.social.botFramework.util.CollectionUtils;
 
 /**
  * @author Anton Leliuk
@@ -24,6 +25,21 @@ public class ThumbnailCard extends AbstractCard {
      * This action will be activated when user taps on the card itself
      */
     private CardAction tap;
+
+    public ThumbnailCard addButton(CardAction button){
+        this.buttons = CollectionUtils.add(buttons, button);
+        return this;
+    }
+
+    public ThumbnailCard addImage(CardImage image){
+        this.images = CollectionUtils.add(images, image);
+        return this;
+    }
+
+    public ThumbnailCard tap(CardAction tap){
+        this.tap = tap;
+        return this;
+    }
 
     @Override
     public CardType getCardType() {

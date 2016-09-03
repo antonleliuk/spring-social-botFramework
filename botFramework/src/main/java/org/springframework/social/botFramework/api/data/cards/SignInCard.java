@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.social.botFramework.api.dict.CardType;
+import org.springframework.social.botFramework.util.CollectionUtils;
 
 /**
  * A card representing a request to signing
@@ -19,6 +20,11 @@ public class SignInCard extends AbstractCard {
     @Override
     public CardType getCardType() {
         return CardType.SIGN_IN_CARD;
+    }
+
+    public SignInCard addButton(CardAction button){
+        this.buttons = CollectionUtils.add(buttons, button);
+        return this;
     }
 
     public List<CardAction> getButtons() {

@@ -12,6 +12,16 @@ public class Fact {
 
     private String value;
 
+    public Fact key(String key){
+        this.key = key;
+        return this;
+    }
+
+    public Fact value(String value){
+        this.value = value;
+        return this;
+    }
+
     public String getKey() {
         return key;
     }

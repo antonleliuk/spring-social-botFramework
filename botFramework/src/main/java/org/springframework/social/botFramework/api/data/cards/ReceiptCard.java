@@ -1,9 +1,9 @@
 package org.springframework.social.botFramework.api.data.cards;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.social.botFramework.api.dict.CardType;
+import org.springframework.social.botFramework.util.CollectionUtils;
 
 /**
  * @author Anton Leliuk
@@ -13,7 +13,7 @@ public class ReceiptCard extends AbstractCard {
     /**
      * Set of actions applicable to the current card
      */
-    private List<CardAction> buttons = new ArrayList<>();
+    private List<CardAction> buttons;
 
     /**
      * This action will be activated when user taps on the card itself
@@ -23,12 +23,12 @@ public class ReceiptCard extends AbstractCard {
     /**
      * List of Fact objects
      */
-    private List<Fact> facts = new ArrayList<>();
+    private List<Fact> facts;
 
     /**
      * List of receipt items
      */
-    private List<ReceiptItem> items = new ArrayList<>();
+    private List<ReceiptItem> items;
 
     /**
      * Total amount of TAX paid (or should be paid)
@@ -44,6 +44,41 @@ public class ReceiptCard extends AbstractCard {
      * Total amount of VAT paid (or should be paid)
      */
     private String vat;
+
+    public ReceiptCard addButton(CardAction button){
+        this.buttons = CollectionUtils.add(buttons, button);
+        return this;
+    }
+
+    public ReceiptCard tap(CardAction tap){
+        this.tap = tap;
+        return this;
+    }
+
+    public ReceiptCard addFact(Fact fact){
+        this.facts = CollectionUtils.add(facts, fact);
+        return this;
+    }
+
+    public ReceiptCard addItem(ReceiptItem item){
+        this.items = CollectionUtils.add(items, item);
+        return this;
+    }
+
+    public ReceiptCard tax(String tax){
+        this.tax = tax;
+        return this;
+    }
+
+    public ReceiptCard total(String total){
+        this.total = total;
+        return this;
+    }
+
+    public ReceiptCard vat(String vat){
+        this.vat = vat;
+        return this;
+    }
 
     @Override
     public CardType getCardType() {

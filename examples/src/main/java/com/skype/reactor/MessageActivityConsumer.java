@@ -15,6 +15,9 @@ import org.springframework.social.botFramework.api.dict.AttachmentLayout;
 import org.springframework.social.botFramework.api.dict.CardActionType;
 import org.springframework.social.botFramework.api.dict.TextFormat;
 import org.springframework.social.botFramework.reactor.consumer.AbstractActivityConsumer;
+import org.springframework.social.botFramework.text.builder.TextBuilder;
+import org.springframework.social.botFramework.text.data.Text;
+import org.springframework.social.botFramework.text.dict.Smiles;
 
 /**
  * @author Anton Leliuk
@@ -23,7 +26,7 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
 
     @Override
     protected void acceptInternal(Activity activity) {
-        Activity replay = activity.createReplay().textMessage(activity.getText());
+        Activity replay = activity.createReplay().message().text(TextBuilder.newInstance().addPart(Text.text(activity.getText())).addPart(Smiles.Coffee).text());
         botFramework.sendToConversation(replay.getRecipient().getId(), replay);
 
         Activity card = activity.createReplay()
@@ -51,40 +54,31 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
         card.addAttachment(hc.toAttachment());
         botFramework.sendToConversation(card.getRecipient().getId(), card);
 
-        card = activity.createReplay();
-        card.setAttachmentLayout(AttachmentLayout.carousel);
-        card.setType(ActivityType.card);
-        card.setText("Simple signIn card");
-        card.setSummary("Summary of the signIn card");
-        card.setTextFormat(TextFormat.xml);
+        card = activity.createReplay()
+                .card()
+                .attachmentLayout(AttachmentLayout.carousel)
+                .text("Simple signIn card")
+                .summary("Summary of the signIn card")
+                .textFormat(TextFormat.xml);
 
-        SignInCard sc = new SignInCard();
-        sc.setTitle("Sign title");
-        sc.setText("Some text");
-        sc.setSubTitle("Some subtitle");
+        SignInCard sc = new SignInCard().title("Sign title").text("Some text").subTitle("Some subtitle");
 
-        CardAction signInButton = new CardAction();
-        signInButton.setTitle("signin");
-        signInButton.setType(CardActionType.signin);
-        signInButton.setValue("https://profitsoft.ua/uathesystem");
-        sc.getButtons().add(signInButton);
-        Attachment<SignInCard> sa = new Attachment<>();
-        sa.setContent(sc);
-        sa.setContentType(sc.getCardType().getType());
-        card.addAttachment(sa);
+        CardAction signInButton = new CardAction()
+                .title("Login in TheSystem")
+                .type(CardActionType.signin)
+                .value("https://profitsoft.ua/uathesystem");
+        sc.addButton(signInButton);
+        card.addAttachment(sc.toAttachment());
         botFramework.sendToConversation(card.getRecipient().getId(), card);
 
-        card = activity.createReplay();
-        card.setAttachmentLayout(AttachmentLayout.carousel);
-        card.setType(ActivityType.card);
-        card.setText("Simple thumbnail card");
-        card.setSummary("Summary of the thumbnail card");
-        card.setTextFormat(TextFormat.xml);
+        card = activity.createReplay()
+                .card()
+                .attachmentLayout(AttachmentLayout.carousel)
+                .text("Simple thumbnail card")
+                .summary("Summary of the thumbnail card")
+                .textFormat(TextFormat.xml);
 
-        ThumbnailCard tc = new ThumbnailCard();
-        tc.setTitle("Title");
-        tc.setText("Text");
-        tc.setSubTitle("Sub title");
+        ThumbnailCard tc = new ThumbnailCard().title("Title").text("Text").subTitle("Sub title");
 
         CardAction tcButton = new CardAction();
         tcButton.setType(CardActionType.openUrl);
@@ -110,10 +104,7 @@ public class MessageActivityConsumer extends AbstractActivityConsumer {
         rc.setText("Text");
         rc.setSubTitle("Sub title");
 
-        Fact f = new Fact();
-        f.setKey("Some key");
-        f.setValue("Some value");
-        rc.getFacts().add(f);
+        rc.addFact(new Fact().key("Some key").value("Some value"));
 
         ReceiptItem ri = new ReceiptItem();
         CardImage rci = new CardImage();

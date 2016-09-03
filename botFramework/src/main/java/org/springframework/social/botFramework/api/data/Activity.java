@@ -123,7 +123,7 @@ public class Activity extends BaseBotFrameworkMessage {
     }
 
     public <C>Activity addAttachment(Attachment<C> attachment){
-        CollectionUtils.add(attachments, attachment);
+        attachments = CollectionUtils.add(attachments, attachment);
         return this;
     }
 
@@ -132,9 +132,9 @@ public class Activity extends BaseBotFrameworkMessage {
         return this;
     }
 
-    public Activity textMessage(String text){
+    public Activity message(){
         this.type = ActivityType.text_message;
-        return text(text);
+        return this;
     }
 
     public Activity card(){

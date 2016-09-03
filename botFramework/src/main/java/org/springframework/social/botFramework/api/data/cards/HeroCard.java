@@ -31,12 +31,12 @@ public class HeroCard extends AbstractCard {
     }
 
     public HeroCard addButton(CardAction button){
-        CollectionUtils.add(buttons, button);
+        buttons = CollectionUtils.add(buttons, button);
         return this;
     }
 
     public HeroCard addImage(CardImage image){
-        CollectionUtils.add(images, image);
+        images = CollectionUtils.add(images, image);
         return this;
     }
 

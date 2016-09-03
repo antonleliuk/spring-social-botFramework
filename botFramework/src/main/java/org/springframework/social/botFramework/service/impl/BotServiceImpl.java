@@ -22,7 +22,7 @@ public class BotServiceImpl implements BotService {
 
     @Autowired
     public <S extends Selector, C extends Consumer> void initializeConsumers(Collection<BotFrameworkConsumerDefinition<S, C>> definitions){
-        definitions.parallelStream().forEach(d -> eventBus.on(d.getSelector(), d.getConsumer()));
+        definitions.stream().forEach(d -> eventBus.on(d.getSelector(), d.getConsumer()));
     }
 
     public void reply(Activity activity){
