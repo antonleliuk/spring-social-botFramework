@@ -1,16 +1,10 @@
 package org.springframework.social.botFramework.service.impl;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.botFramework.api.BotFramework;
 import org.springframework.social.botFramework.api.data.Activity;
-import org.springframework.social.botFramework.reactor.BotFrameworkConsumerDefinition;
+import org.springframework.social.botFramework.service.ActivityProcessorCallback;
 import org.springframework.social.botFramework.service.BotService;
-
-import reactor.bus.Event;
-import reactor.bus.EventBus;
-import reactor.bus.selector.Selector;
-import reactor.fn.Consumer;
 
 /**
  * @author Anton Leliuk
@@ -18,14 +12,40 @@ import reactor.fn.Consumer;
 public class BotServiceImpl implements BotService {
 
     @Autowired
-    private EventBus eventBus;
+    private BotFramework botFramework;
 
-    @Autowired
-    public <S extends Selector, C extends Consumer> void initializeConsumers(Collection<BotFrameworkConsumerDefinition<S, C>> definitions){
-        definitions.stream().forEach(d -> eventBus.on(d.getSelector(), d.getConsumer()));
+    @Override
+    public void process(Activity activity, ActivityProcessorCallback callback){
+        switch (activity.getActivity()){
+            case message:
+                if(activity.getConversation().isGroup()){
+                    callback.onGroupMessage(activity);
+                } else {
+                    callback.onPersonalMessage(activity);
+                }
+                break;
+            case contactRelationUpdate:
+                callback.onContactRelationUpdate(activity);
+                break;
+            case conversationUpdate:
+                callback.onConversationUpdate(activity);
+                break;
+            case ping:
+                callback.onPing(activity);
+                break;
+            case deleteUserData:
+                callback.onDeleteUserData(activity);
+                break;
+        }
     }
 
-    public void reply(Activity activity){
-        eventBus.notify(activity.getType(), Event.wrap(activity));
+    @Override
+    public void typing(Activity activity) {
+        reply(activity.createReplay().typing());
+    }
+
+    @Override
+    public void reply(Activity answer) {
+        botFramework.sendToConversation(answer.getConversation().getId(), answer);
     }
 }

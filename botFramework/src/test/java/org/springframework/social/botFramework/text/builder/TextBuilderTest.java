@@ -22,4 +22,9 @@ public class TextBuilderTest {
         builder.addPart(Text.text("I'm glad to see you")).addPart(Smiles.Happy);
         Assert.assertEquals("I'm glad to see you(happy)", builder.text());
     }
+
+    @Test
+    public void parse() throws Exception {
+        String text = "Some test and <b raw_pre=\"*\" raw_post=\"*\">its a bold text</b>";
+    }
 }

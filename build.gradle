@@ -24,9 +24,6 @@ subprojects {
             transitive = false
         }
         compile ("org.springframework.security:spring-security-core:$springSecurityVersion")
-        compile ("io.projectreactor:reactor-bus:$reactorVersion")
-        compile ("io.projectreactor:reactor-stream:$reactorVersion")
-        compile ("org.projectreactor:reactor-spring:$reactorSpringVersion")
     }
 
 }

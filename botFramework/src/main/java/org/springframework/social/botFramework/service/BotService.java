@@ -7,5 +7,9 @@ import org.springframework.social.botFramework.api.data.Activity;
  */
 public interface BotService {
 
-    void reply(Activity activity);
+    void process(Activity activity, ActivityProcessorCallback callback);
+
+    void typing(Activity activity);
+
+    void reply(Activity answer);
 }
