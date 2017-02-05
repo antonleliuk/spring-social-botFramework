@@ -12,7 +12,7 @@ buildscript {
 dependencies {
 //    compile "org.springframework.social:spring-social-botFramework:0.0.1"
 //    compile "org.springframework.social:spring-social-botFramework-config:0.0.1"
-    compile project(":spring-social-botFramework")
+    compile project(":spring-social-botFramework-core")
     compile project(":spring-social-botFramework-config")
     compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
         exclude module: "spring-boot-starter-logging"
