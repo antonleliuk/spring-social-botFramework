@@ -1,4 +1,4 @@
-apply plugin: "spring-boot"
+apply plugin: "org.springframework.boot"
 
 buildscript {
     repositories {
@@ -10,8 +10,10 @@ buildscript {
 }
 
 dependencies {
-    compile project(":botFramework")
-    compile project(":boot")
+//    compile "org.springframework.social:spring-social-botFramework:0.0.1"
+//    compile "org.springframework.social:spring-social-botFramework-config:0.0.1"
+    compile project(":spring-social-botFramework")
+    compile project(":spring-social-botFramework-config")
     compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
         exclude module: "spring-boot-starter-logging"
     }
@@ -19,6 +21,9 @@ dependencies {
     compile("com.github.isrsal:spring-mvc-logger:0.2"){
         exclude module: "servlet-api"
     }
+
+    compile group: "org.springframework.security.oauth", name: "spring-security-oauth2", version: "$springSecurityOAuth2Version"
+
 //    testCompile group: "org.springframework.boot", name: "spring-boot-starter-test", version: "$springBootVersion"
 }
 

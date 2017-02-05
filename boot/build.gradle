@@ -1,5 +1,49 @@
 dependencies {
-
     compile group: "org.springframework.boot", name: "spring-boot-autoconfigure", version: "${springBootVersion}"
-    compile project(":botFramework")
+    compile project(":spring-social-botFramework")
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication){
+            groupId "org.springframework.social"
+            artifactId project.name
+            version project.version
+
+            from components.java
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode("name", "Spring Boot BotFramework")
+                root.appendNode("description", "Spring Boot autoconfiguration for Microsoft BotFramework")
+                root.appendNode("url", "https://github.com/antonleliuk/spring-social-botFramework")
+                root.appendNode("inceptionYear", "2016")
+                def scm = root.appendNode("scm")
+                scm.appendNode("url", "https://github.com/antonleliuk/spring-social-botFramework")
+                scm.appendNode("connection", "https://github.com/antonleliuk/spring-social-botFramework.git")
+                scm.appendNode("developerConnection", "https://github.com/antonleliuk/spring-social-botFramework.git")
+                def license = root.appendNode("licenses").appendNode("license")
+                license.appendNode("name", "The Apache Software License, Version 2.0")
+                license.appendNode("url", "http://www.apache.org/licenses/LICENSE-2.0.txt")
+                license.appendNode("distribution", "repo")
+                def developer = root.appendNode("developers").appendNode("developer")
+                developer.appendNode("id", "anton.leliuk")
+                developer.appendNode("name", "Anton Leliuk")
+                developer.appendNode("email", "anton.leluk@gmail.com")
+            }
+        }
+
+        mavenSources(MavenPublication){
+            groupId "org.springframework.social"
+            artifactId project.name
+            version project.version
+
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+
+    }
 }

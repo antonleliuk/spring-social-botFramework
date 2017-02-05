@@ -1,3 +1,5 @@
+
+
 subprojects {
     apply plugin: "java"
     apply plugin: "idea"
@@ -5,7 +7,10 @@ subprojects {
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-    version = "1.0"
+    group = "org.springFramework.social"
+    version = "0.0.1"
+
+    apply plugin: "maven-publish"
 
     repositories {
         mavenCentral()
@@ -15,15 +20,23 @@ subprojects {
         compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile("org.springframework.social:spring-social-core:$springSocialVersion"){
-            transitive = false
+//            transitive = false
         }
         compile("org.springframework.social:spring-social-config:$springSocialVersion"){
-            transitive = false
+//            transitive = false
         }
         compile("org.springframework.social:spring-social-security:$springSocialVersion"){
-            transitive = false
+//            transitive = false
         }
         compile ("org.springframework.security:spring-security-core:$springSecurityVersion")
     }
 
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
+    }
 }
+
+task wrapper(type: Wrapper){
+    gradleVersion = "3.3"
+}
+
