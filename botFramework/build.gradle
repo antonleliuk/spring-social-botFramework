@@ -46,7 +46,7 @@ publishing {
         }
 
         mavenSources(MavenPublication){
-            groupId "org.springframework.social"
+            groupId "ua.profitsoft"
             artifactId project.name
             version project.version
 
