@@ -7,3 +7,4 @@ cache:
     - $HOME/.gradle/wrapper/
 
 language: java
+sudo: required
