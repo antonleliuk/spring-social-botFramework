@@ -8,3 +8,5 @@ cache:
 
 language: java
 sudo: required
+jdk:
+  - oraclejdk8
