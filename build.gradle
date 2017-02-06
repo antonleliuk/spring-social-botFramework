@@ -5,7 +5,7 @@ subprojects {
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-    group = "ua.profitsoft"
+    group = "ua.profitsoft.social"
     version = "0.0.1"
 
     apply plugin: "maven-publish"
