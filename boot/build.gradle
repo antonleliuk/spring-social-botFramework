@@ -1,3 +1,4 @@
+apply plugin: "maven"
 dependencies {
     compile group: "org.springframework.boot", name: "spring-boot-autoconfigure", version: "${springBootVersion}"
     compile project(":spring-social-botFramework-core")
@@ -6,7 +7,7 @@ dependencies {
 publishing {
     publications {
         mavenJava(MavenPublication){
-            groupId "org.springframework.social"
+            groupId "ua.profitsoft"
             artifactId project.name
             version project.version
 
@@ -31,6 +32,12 @@ publishing {
                 developer.appendNode("name", "Anton Leliuk")
                 developer.appendNode("email", "anton.leluk@gmail.com")
             }
+
+            repositories {
+                maven {
+                    url "${rootProject.buildDir}/repo"
+                }
+            }
         }
 
         mavenSources(MavenPublication){
@@ -43,7 +50,71 @@ publishing {
             artifact sourceJar {
                 classifier "sources"
             }
+
+            repositories {
+                maven {
+                    url "${rootProject.buildDir}/repo"
+                }
+            }
+        }
+    }
+}
+
+ext.optionalDeps = []
+ext.providedDeps = []
+
+ext.optional = { optionalDeps << it }
+ext.provided = { providedDeps << it }
+
+install {
+    repositories.mavenInstaller {
+        customizePom(pom, project)
+    }
+}
+
+def customizePom(pom, gradleProject) {
+    pom.whenConfigured { generatedPom ->
+        // respect "optional" and "provided" dependencies
+        gradleProject.optionalDeps.each { dep ->
+            generatedPom.dependencies.findAll { it.artifactId == dep.name }*.optional = true
+        }
+        gradleProject.providedDeps.each { dep ->
+            generatedPom.dependencies.findAll { it.artifactId == dep.name }*.scope = "provided"
         }
 
+        // eliminate test-scoped dependencies (no need in maven central poms)
+        generatedPom.dependencies.removeAll { dep ->
+            dep.scope == "test"
+        }
+
+        // add all items necessary for maven central publication
+        generatedPom.project {
+            name = "Spring Boot BotFramework"
+            description = "Spring Boot autoconfiguration for Microsoft BotFramework"
+            url = "https://github.com/antonleliuk/spring-social-botFramework"
+            organization {
+                name = "SpringSocial"
+                url = "http://springsource.org/spring-social"
+            }
+            licenses {
+                license {
+                    name "The Apache Software License, Version 2.0"
+                    url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    distribution "repo"
+                }
+            }
+            scm {
+                url = "https://github.com/antonleliuk/spring-social-botFramework"
+                connection = "scm:git:git://github.com/antonleliuk/spring-social-botFramework.git"
+                developerConnection = "scm:git:git://github.com/antonleliuk/spring-social-botFramework.git"
+            }
+            developers {
+                developer {
+                    id = "anton.leliuk"
+                    name = "Anton Leliuk"
+                    email = "anton.leluk@gmail.com"
+                }
+            }
+        }
     }
 }
