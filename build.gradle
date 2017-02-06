@@ -2,13 +2,14 @@ subprojects {
     apply plugin: "java"
     apply plugin: "idea"
     apply plugin: "eclipse"
+//    apply plugin: "maven-publish"
+//    apply plugin: "maven"
+//    apply plugin: "signing"
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
     group = "ua.profitsoft.social"
     version = "0.0.1"
-
-    apply plugin: "maven-publish"
 
     repositories {
         mavenCentral()
@@ -31,6 +32,11 @@ subprojects {
 
     task sourceJar(type: Jar) {
         from sourceSets.main.allJava
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
     }
 }
 

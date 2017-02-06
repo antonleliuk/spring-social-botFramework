@@ -1,60 +1,121 @@
+apply plugin: "maven"
+apply plugin: "signing"
+
 dependencies {
     compile group: "org.springframework.boot", name: "spring-boot-autoconfigure", version: "${springBootVersion}"
     compile project(":spring-social-botFramework-core")
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication){
-            groupId "ua.profitsoft.social"
-            artifactId project.name
-            version project.version
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourceJar
+}
 
-            from components.java
+signing {
+    sign configurations.archives
+}
 
-            pom.withXml {
-                def root = asNode()
-                root.appendNode("name", "Spring Boot BotFramework")
-                root.appendNode("description", "Spring Boot autoconfiguration for Microsoft BotFramework")
-                root.appendNode("url", "https://github.com/antonleliuk/spring-social-botFramework")
-                root.appendNode("inceptionYear", "2016")
-                def scm = root.appendNode("scm")
-                scm.appendNode("url", "https://github.com/antonleliuk/spring-social-botFramework")
-                scm.appendNode("connection", "https://github.com/antonleliuk/spring-social-botFramework.git")
-                scm.appendNode("developerConnection", "https://github.com/antonleliuk/spring-social-botFramework.git")
-                def license = root.appendNode("licenses").appendNode("license")
-                license.appendNode("name", "The Apache Software License, Version 2.0")
-                license.appendNode("url", "http://www.apache.org/licenses/LICENSE-2.0.txt")
-                license.appendNode("distribution", "repo")
-                def developer = root.appendNode("developers").appendNode("developer")
-                developer.appendNode("id", "anton.leliuk")
-                developer.appendNode("name", "Anton Leliuk")
-                developer.appendNode("email", "anton.leluk@gmail.com")
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: "${sonatypeUsername}", password: "${sonatypePassword}")
             }
 
-            repositories {
-                maven {
-                    url "${rootProject.buildDir}/repo"
+            pom.project {
+                name "Spring Boot Microsoft BotFramework"
+                packaging "jar"
+                description "Spring Boot auto-configuration for Microsoft BotFramework"
+                url "https://github.com/antonleliuk/spring-social-botFramework"
+                inceptionYear "2016"
+
+                scm {
+                    url "https://github.com/antonleliuk/spring-social-botFramework"
+                    connection "https://github.com/antonleliuk/spring-social-botFramework.git"
+                    developerConnection "https://github.com/antonleliuk/spring-social-botFramework.git"
                 }
-            }
-        }
 
-        mavenSources(MavenPublication){
-            groupId "ua.profitsoft.social"
-            artifactId project.name
-            version project.version
+                licenses {
+                    license {
+                        name "The Apache Software License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution "repo"
+                    }
+                }
 
-            from components.java
-
-            artifact sourceJar {
-                classifier "sources"
-            }
-
-            repositories {
-                maven {
-                    url "${rootProject.buildDir}/repo"
+                developers {
+                    developer {
+                        id "anton.leliuk"
+                        name "Anton Leliuk"
+                        email "anton.leluk@gmail.com"
+                    }
                 }
             }
         }
     }
 }
+
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication){
+//            groupId "ua.profitsoft.social"
+//            artifactId project.name
+//            version project.version
+//
+//            from components.java
+//
+//            pom.withXml {
+//                def root = asNode()
+//                root.appendNode("name", "Spring Boot BotFramework")
+//                root.appendNode("description", "Spring Boot auto-configuration for Microsoft BotFramework")
+//                root.appendNode("url", "https://github.com/antonleliuk/spring-social-botFramework")
+//                root.appendNode("inceptionYear", "2016")
+//                def scm = root.appendNode("scm")
+//                scm.appendNode("url", "https://github.com/antonleliuk/spring-social-botFramework")
+//                scm.appendNode("connection", "https://github.com/antonleliuk/spring-social-botFramework.git")
+//                scm.appendNode("developerConnection", "https://github.com/antonleliuk/spring-social-botFramework.git")
+//                def license = root.appendNode("licenses").appendNode("license")
+//                license.appendNode("name", "The Apache Software License, Version 2.0")
+//                license.appendNode("url", "http://www.apache.org/licenses/LICENSE-2.0.txt")
+//                license.appendNode("distribution", "repo")
+//                def developer = root.appendNode("developers").appendNode("developer")
+//                developer.appendNode("id", "anton.leliuk")
+//                developer.appendNode("name", "Anton Leliuk")
+//                developer.appendNode("email", "anton.leluk@gmail.com")
+//            }
+//
+//            repositories {
+//                maven {
+//                    url "${rootProject.buildDir}/repo"
+//                }
+//            }
+//        }
+//
+//        mavenSources(MavenPublication){
+//            groupId "ua.profitsoft.social"
+//            artifactId project.name
+//            version project.version
+//
+//            from components.java
+//
+//            artifact sourceJar {
+//                classifier "sources"
+//            }
+//
+//            repositories {
+//                maven {
+//                    url "${rootProject.buildDir}/repo"
+//                }
+//            }
+//        }
+//
+//        mavenJavadoc(MavenPublication) {
+//            artifact(javadocJar) {
+//                classifier "javadoc"
+//            }
+//        }
+//    }
+//}

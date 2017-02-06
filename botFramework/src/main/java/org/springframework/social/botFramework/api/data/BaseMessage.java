@@ -3,6 +3,7 @@ package org.springframework.social.botFramework.api.data;
 import org.springframework.social.botFramework.api.dict.ActivityType;
 
 /**
+ * Base message
  * @author Anton Leliuk
  */
 public abstract class BaseMessage {
@@ -16,6 +17,7 @@ public abstract class BaseMessage {
     /**
      * Which event happened and what other fields to expect.
      * For message this field contains constant string: “message”
+     * @return {@link ActivityType} type of an activity
      */
     public abstract ActivityType getActivity();
 

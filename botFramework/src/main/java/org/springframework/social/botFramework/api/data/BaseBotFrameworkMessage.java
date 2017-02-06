@@ -5,6 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
+ * Base BotFramework message
  * @author Anton Leliuk
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)

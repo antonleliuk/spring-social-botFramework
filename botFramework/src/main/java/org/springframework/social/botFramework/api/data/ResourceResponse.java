@@ -1,6 +1,7 @@
 package org.springframework.social.botFramework.api.data;
 
 /**
+ * Response with id of resource
  * @author Anton Leliuk
  */
 public class ResourceResponse {

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
+ * Basic communication type for BotFramework
  * @author Anton Leliuk
  */
 public class Activity extends BaseBotFrameworkMessage {
@@ -34,6 +35,9 @@ public class Activity extends BaseBotFrameworkMessage {
      */
     private Object channelData;
 
+    /**
+     * Conversation
+     */
     private ConversationAccount conversation;
 
     /**
