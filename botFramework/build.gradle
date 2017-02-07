@@ -13,6 +13,7 @@ artifacts {
 }
 
 signing {
+    required { signingEnabled }
     sign configurations.archives
 }
 
