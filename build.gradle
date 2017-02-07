@@ -12,7 +12,7 @@ subprojects {
     version = "0.0.1"
 
     ext {
-        localUserName = project.hasProperty("sonatypeUsername") ? project.sonatypeUsername : ""
+        localSonatypeUserName = project.hasProperty("sonatypeUsername") ? project.sonatypeUsername : ""
         localSonatypePassword = project.hasProperty("sonatypePassword") ? project.sonatypePassword :""
         signingEnabled = project.hasProperty("signingEnabled") ? project.signingEnabled : false
     }
