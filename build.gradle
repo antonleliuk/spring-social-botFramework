@@ -11,6 +11,11 @@ subprojects {
     group = "ua.profitsoft.social"
     version = "0.0.1"
 
+    ext {
+        localUserName = project.hasProperty("sonatypeUsername") ? project.sonatypeUsername : ""
+        localSonatypePassword = project.hasProperty("sonatypePassword") ? project.sonatypePassword :""
+    }
+
     repositories {
         mavenCentral()
     }
