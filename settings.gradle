@@ -1,5 +1,4 @@
 include "boot", "botFramework"
-//, "examples"
 
 project(":boot").name = "spring-social-botFramework-config"
 project(":botFramework").name = "spring-social-botFramework-core"

@@ -2,14 +2,13 @@ subprojects {
     apply plugin: "java"
     apply plugin: "idea"
     apply plugin: "eclipse"
-//    apply plugin: "maven-publish"
-//    apply plugin: "maven"
-//    apply plugin: "signing"
+    apply plugin: "maven"
+    apply plugin: "signing"
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
     group = "ua.profitsoft.social"
-    version = "0.0.1"
+    version = "0.0.2"
 
     ext {
         localSonatypeUserName = project.hasProperty("sonatypeUsername") ? project.sonatypeUsername : ""
@@ -37,12 +36,24 @@ subprojects {
     }
 
     task sourceJar(type: Jar) {
+        classifier = "sources"
         from sourceSets.main.allJava
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
+        classifier = "javadoc"
         from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives jar
+        archives javadocJar
+        archives sourceJar
+    }
+
+    signing {
+        required { signingEnabled }
+        sign configurations.archives
     }
 }
 

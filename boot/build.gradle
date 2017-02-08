@@ -1,20 +1,6 @@
-apply plugin: "maven"
-apply plugin: "signing"
-
 dependencies {
     compile group: "org.springframework.boot", name: "spring-boot-autoconfigure", version: "${springBootVersion}"
     compile project(":spring-social-botFramework-core")
-}
-
-artifacts {
-    archives jar
-    archives javadocJar
-    archives sourceJar
-}
-
-signing {
-    required { signingEnabled }
-    sign configurations.archives
 }
 
 uploadArchives {
