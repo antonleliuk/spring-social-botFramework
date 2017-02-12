@@ -28,6 +28,6 @@ Microsoft BotFramework spring-boot
 
 ### Using Gradle
 ```groovy
-compile("ua.profitsoft.social:spring-social-botFramework-core:0.0.2")
-compile("ua.profitsoft.social:spring-social-botFramework-config:0.0.2")
+compile("ua.profitsoft.social:spring-social-botframework-core:0.0.2")
+compile("ua.profitsoft.social:spring-social-botframework-config:0.0.2")
 ```
