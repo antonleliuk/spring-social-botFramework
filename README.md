@@ -7,9 +7,7 @@ Microsoft BotFramework core
 Microsoft BotFramework spring-boot
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/ua.profitsoft.social/spring-social-botFramework-config/badge.svg)](https://maven-badges.herokuapp.com/maven-central/ua.profitsoft.social/spring-social-botFramework-config)
 
-[![Code Climate](https://codeclimate.com/github/antonleliuk/spring-social-botFramework/badges/gpa.svg)](https://codeclimate.com/github/antonleliuk/spring-social-botFramework)
-[![Test Coverage](https://codeclimate.com/github/antonleliuk/spring-social-botFramework/badges/coverage.svg)](https://codeclimate.com/github/antonleliuk/spring-social-botFramework/coverage)
-[![Issue Count](https://codeclimate.com/github/antonleliuk/spring-social-botFramework/badges/issue_count.svg)](https://codeclimate.com/github/antonleliuk/spring-social-botFramework)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8c5d43477e944678b7815ee9d52c41a)](https://www.codacy.com/app/antonleliuk/spring-social-botFramework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=antonleliuk/spring-social-botFramework&amp;utm_campaign=Badge_Grade)
 
 ## Getting Started
 ### Using Maven
