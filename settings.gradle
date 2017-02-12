@@ -1,5 +1,5 @@
 include "boot", "botFramework"
 
-project(":boot").name = "spring-social-botFramework-config"
-project(":botFramework").name = "spring-social-botFramework-core"
+project(":boot").name = "spring-social-botframework-config"
+project(":botFramework").name = "spring-social-botframework-core"
 

@@ -1,6 +1,6 @@
 dependencies {
     compile group: "org.springframework.boot", name: "spring-boot-autoconfigure", version: "${springBootVersion}"
-    compile project(":spring-social-botFramework-core")
+    compile project(":spring-social-botframework-core")
 }
 
 uploadArchives {

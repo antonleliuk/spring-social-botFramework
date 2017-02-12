@@ -10,7 +10,3 @@ language: java
 sudo: required
 jdk:
   - oraclejdk8
-
-addons:
-  code_climate:
-    repo_token: 90ae41011e0c2eee00deb6c6b6d8976e8f85030830c90975f8a09cb4a4fa94ef

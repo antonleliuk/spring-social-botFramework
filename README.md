@@ -14,12 +14,12 @@ Microsoft BotFramework spring-boot
 <dependencies>
     <dependency>
         <groupId>ua.profitsoft.social</groupId>
-        <artifactId>spring-social-botFramework-core</artifactId>
+        <artifactId>spring-social-botframework-core</artifactId>
         <version>0.0.2</version>
     </dependency>
     <dependency>
         <groupId>ua.profitsoft.social</groupId>
-        <artifactId>spring-social-botFramework-config</artifactId>
+        <artifactId>spring-social-botframework-config</artifactId>
         <version>0.0.2</version>
     </dependency>
 </dependencies>
