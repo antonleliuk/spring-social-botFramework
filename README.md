@@ -15,12 +15,12 @@ Microsoft BotFramework spring-boot
     <dependency>
         <groupId>ua.profitsoft.social</groupId>
         <artifactId>spring-social-botframework-core</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3</version>
     </dependency>
     <dependency>
         <groupId>ua.profitsoft.social</groupId>
         <artifactId>spring-social-botframework-config</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3</version>
     </dependency>
 </dependencies>
 
@@ -28,6 +28,6 @@ Microsoft BotFramework spring-boot
 
 ### Using Gradle
 ```groovy
-compile("ua.profitsoft.social:spring-social-botframework-core:0.0.2")
-compile("ua.profitsoft.social:spring-social-botframework-config:0.0.2")
+compile("ua.profitsoft.social:spring-social-botframework-core:0.0.3")
+compile("ua.profitsoft.social:spring-social-botframework-config:0.0.3")
 ```
