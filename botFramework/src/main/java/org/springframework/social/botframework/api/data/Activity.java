@@ -1,22 +1,22 @@
 package org.springframework.social.botframework.api.data;
 
-import java.util.List;
-
-import org.springframework.social.botframework.api.dict.TextFormat;
-import org.springframework.social.botframework.api.dict.ActivityType;
-import org.springframework.social.botframework.api.dict.AttachmentLayout;
-import org.springframework.social.botframework.api.json.ActivityTypeDeserializer;
-import org.springframework.social.botframework.api.json.ActivityTypeSerializer;
-import org.springframework.social.botframework.util.CollectionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.social.botframework.api.dict.ActivityType;
+import org.springframework.social.botframework.api.dict.AttachmentLayout;
+import org.springframework.social.botframework.api.dict.TextFormat;
+import org.springframework.social.botframework.api.json.ActivityTypeDeserializer;
+import org.springframework.social.botframework.api.json.DictTypeSerializer;
+import org.springframework.social.botframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * Basic communication type for BotFramework
  * @author Anton Leliuk
  */
-public class Activity extends BaseBotFrameworkMessage {
+public class Activity extends BaseMessage {
 
     /**
      * ContactAdded/Removed action
@@ -56,9 +56,17 @@ public class Activity extends BaseBotFrameworkMessage {
     private boolean historyDisclosed;
 
     /**
-     * The language code of the Text field
+     * Value that indicates whether your bot is accepting, expecting, or ignoring user input after the message is
+     * delivered to the client. One of these values: acceptingInput, expectingInput, ignoringInput.
      */
-    private String locale;
+    private String inputHint;
+
+    /**
+     * Locale of the language that should be used to display text within the message, in the format <language>-<country>.
+     * The channel uses this property to indicate the user's language, so that your bot may specify display strings
+     * in that language. Default value is en-US.
+     */
+    private String locale = "en-US";
 
     /**
      * Addresses of added contacts
@@ -79,9 +87,26 @@ public class Activity extends BaseBotFrameworkMessage {
     private ChannelAccount recipient;
 
     /**
+     * A ConversationReference object that defines a particular point in a conversation.
+     */
+    private ConversationReference relatesTo;
+
+    /**
      * The original id this message is a response to
      */
     private String replyToId;
+
+    /**
+     * Text to be spoken by your bot on a speech-enabled channel. To control various characteristics of your bot's
+     * speech such as voice, rate, volume, pronunciation, and pitch, specify this property
+     * in @see https://msdn.microsoft.com/en-us/library/hh378377(v=office.14).aspx Speech Synthesis Markup Language (SSML) format.
+     */
+    private String speak;
+
+    /**
+     * A SuggestedActions object that defines the options from which the user can choose.
+     */
+    private SuggestedActions suggestedActions;
 
     /**
      * Text to display if you can't render cards
@@ -106,7 +131,7 @@ public class Activity extends BaseBotFrameworkMessage {
     /**
      * The type of the activity
      */
-    @JsonSerialize(using = ActivityTypeSerializer.class)
+    @JsonSerialize(using = DictTypeSerializer.class)
     @JsonDeserialize(using = ActivityTypeDeserializer.class)
     private ActivityType type;
 
@@ -230,6 +255,14 @@ public class Activity extends BaseBotFrameworkMessage {
         this.historyDisclosed = historyDisclosed;
     }
 
+    public String getInputHint() {
+        return inputHint;
+    }
+
+    public void setInputHint(String inputHint) {
+        this.inputHint = inputHint;
+    }
+
     public String getLocale() {
         return locale;
     }
@@ -270,12 +303,36 @@ public class Activity extends BaseBotFrameworkMessage {
         this.recipient = recipient;
     }
 
+    public ConversationReference getRelatesTo() {
+        return relatesTo;
+    }
+
+    public void setRelatesTo(ConversationReference relatesTo) {
+        this.relatesTo = relatesTo;
+    }
+
     public String getReplyToId() {
         return replyToId;
     }
 
     public void setReplyToId(String replyToId) {
         this.replyToId = replyToId;
+    }
+
+    public String getSpeak() {
+        return speak;
+    }
+
+    public void setSpeak(String speak) {
+        this.speak = speak;
+    }
+
+    public SuggestedActions getSuggestedActions() {
+        return suggestedActions;
+    }
+
+    public void setSuggestedActions(SuggestedActions suggestedActions) {
+        this.suggestedActions = suggestedActions;
     }
 
     public String getSummary() {

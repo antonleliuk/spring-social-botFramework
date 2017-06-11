@@ -3,22 +3,11 @@ package org.springframework.social.botframework.api.dict;
 /**
  * @author Anton Leliuk
  */
-public enum ActivityType {
+public enum ActivityType implements DictType {
 
     unknown("unknown"),
-//    error,
-//    personalMessage,
-//    groupMessage,
     text_message("message/text"),
     message("message"),
-//    threadBotAdded,
-//    threadBotRemoved,
-//    threadAddMember,
-//    threadRemoveMember,
-//    threadTopicUpdated,
-//    threadHistoryDisclosedUpdate,
-//    contactAdded,
-//    contactRemoved,
     attachment("message/image"),
     contactRelationUpdate("contactRelationUpdate"),
     conversationUpdate("conversationUpdate"),
@@ -27,27 +16,23 @@ public enum ActivityType {
     deleteUserData("activity/deleteUserData"),
     card("message/card.carousel");
 
-    private String realType;
+    private String type;
 
-    ActivityType(String realType) {
-        this.realType = realType;
+    ActivityType(String type) {
+        this.type = type;
     }
 
     public static ActivityType getInstance(String key){
         for (ActivityType type : values()) {
-            if(type.getRealType().equals(key)){
+            if(type.getType().equals(key)){
                 return type;
             }
         }
-        System.out.println("Unknown activity type - " + key);
         return unknown;
     }
 
-    public String getRealType() {
-        return realType;
+    public String getType() {
+        return type;
     }
 
-    public boolean isPing(){
-        return this == ping;
-    }
 }

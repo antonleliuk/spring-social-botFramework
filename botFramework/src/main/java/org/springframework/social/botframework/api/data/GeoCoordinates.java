@@ -22,7 +22,7 @@ public class GeoCoordinates {
     private Double longitude = null;
 
     /**
-     * The type of the thing
+     * The type of this object. Always set to <b>GeoCoordinates</b>.
      */
     private String type = null;
 

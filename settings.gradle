@@ -1,5 +1,7 @@
-include "boot", "botFramework"
+include "boot", "botFramework", "text", "state", "service"
 
 project(":boot").name = "spring-social-botframework-config"
 project(":botFramework").name = "spring-social-botframework-core"
-
+project(":text").name = "spring-social-botframework-text"
+project(":state").name = "spring-social-botframework-state-core"
+project(":service").name = "spring-social-botframework-service"

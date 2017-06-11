@@ -4,55 +4,29 @@ package org.springframework.social.botframework.api.data;
  * Place (entity type: https://schema.org/Place)
  * @author Anton Leliuk
  */
-public class Place {
-
-    /**
-     * Address of the place (may be `string` or complex object of type `PostalAddress`)
-     */
-    private Object address = null;
+public class Place implements Entity {
 
     /**
      * Geo coordinates of the place (may be complex object of type `GeoCoordinates` or `GeoShape`)
      */
-    private Object geo = null;
+    private GeoCoordinates geo = null;
 
     /**
-     * Map to the place (may be `string` (URL) or complex object of type `Map`)
-     */
-    private Object hasMap = null;
-
-    /**
-     * The type of the thing
+     * This object's type. Always set to Place.
      */
     private String type = null;
 
     /**
-     * The name of the thing
+     * Name of the place.
      */
     private String name = null;
 
-    public Object getAddress() {
-        return address;
-    }
-
-    public void setAddress(Object address) {
-        this.address = address;
-    }
-
-    public Object getGeo() {
+    public GeoCoordinates getGeo() {
         return geo;
     }
 
-    public void setGeo(Object geo) {
+    public void setGeo(GeoCoordinates geo) {
         this.geo = geo;
-    }
-
-    public Object getHasMap() {
-        return hasMap;
-    }
-
-    public void setHasMap(Object hasMap) {
-        this.hasMap = hasMap;
     }
 
     public String getType() {

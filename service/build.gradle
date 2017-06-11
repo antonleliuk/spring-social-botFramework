@@ -1,0 +1,43 @@
+dependencies {
+    compile project(":spring-social-botframework-core")
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: "${localSonatypeUserName}", password: "${localSonatypePassword}")
+            }
+
+            pom.project {
+                name "Spring Social Microsoft BotFramework"
+                packaging "jar"
+                description "Spring Social service for Microsoft BotFramework"
+                url "https://github.com/antonleliuk/spring-social-botFramework"
+                inceptionYear "2016"
+
+                scm {
+                    url "https://github.com/antonleliuk/spring-social-botFramework"
+                    connection "https://github.com/antonleliuk/spring-social-botFramework.git"
+                    developerConnection "https://github.com/antonleliuk/spring-social-botFramework.git"
+                }
+
+                licenses {
+                    license {
+                        name "The Apache Software License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id "anton.leliuk"
+                        name "Anton Leliuk"
+                        email "anton.leluk@gmail.com"
+                    }
+                }
+            }
+        }
+    }
+}

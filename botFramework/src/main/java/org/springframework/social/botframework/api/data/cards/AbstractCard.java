@@ -1,10 +1,10 @@
 package org.springframework.social.botframework.api.data.cards;
 
-import org.springframework.social.botframework.api.dict.CardType;
-import org.springframework.social.botframework.api.json.CardTypeSerializer;
-import org.springframework.social.botframework.api.data.Attachment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.social.botframework.api.data.Attachment;
+import org.springframework.social.botframework.api.dict.CardType;
+import org.springframework.social.botframework.api.json.DictTypeSerializer;
 
 /**
  * @author Anton Leliuk
@@ -16,7 +16,7 @@ public abstract class AbstractCard extends CardElement {
         return new Attachment<C>().content((C) this).contentType(getCardType().getType());
     }
 
-    @JsonSerialize(using = CardTypeSerializer.class)
+    @JsonSerialize(using = DictTypeSerializer.class)
     public abstract CardType getCardType();
 
 }

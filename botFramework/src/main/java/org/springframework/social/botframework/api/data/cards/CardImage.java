@@ -6,17 +6,17 @@ package org.springframework.social.botframework.api.data.cards;
 public class CardImage {
 
     /**
-     * Image description intended for screen readers
+     * Description of the image. You should include the description to support accessibility.
      */
     private String alt;
 
     /**
-     * Action assigned to specific Attachment.E.g.navigate to specific URL or play/open media content
+     * A CardAction object that specifies the action to perform if the user taps or clicks the image.
      */
     private CardAction tap;
 
     /**
-     * URL Thumbnail image for major content property
+     * URL to the source of the image or the base64 binary of the image (for example, data:image/png;base64,iVBORw0KGgo...).
      */
     private String url;
 

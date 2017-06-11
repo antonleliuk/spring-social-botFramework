@@ -58,6 +58,6 @@ subprojects {
 }
 
 task wrapper(type: Wrapper){
-    gradleVersion = "3.3"
+    gradleVersion = "${gradleVersion}"
 }
 

@@ -16,7 +16,7 @@ import org.springframework.social.botframework.api.data.ChannelAccount;
 import org.springframework.social.botframework.api.data.ResourceResponse;
 import org.springframework.social.botframework.api.BotFramework;
 import org.springframework.social.botframework.api.data.AttachmentData;
-import org.springframework.social.botframework.api.data.ConversationParameters;
+import org.springframework.social.botframework.api.data.Conversation;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -46,7 +46,7 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
     }
 
     @Override
-    public ResourceResponse createConversation(ConversationParameters parameters) {
+    public ResourceResponse createConversation(Conversation parameters) {
         return getRestTemplate().postForObject(getMainUrl().path("conversations").toUriString(), parameters, ResourceResponse.class);
     }
 

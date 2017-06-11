@@ -8,7 +8,7 @@ import org.springframework.social.botframework.api.data.AttachmentInfo;
 import org.springframework.social.botframework.api.data.ChannelAccount;
 import org.springframework.social.botframework.api.data.ResourceResponse;
 import org.springframework.social.botframework.api.data.AttachmentData;
-import org.springframework.social.botframework.api.data.ConversationParameters;
+import org.springframework.social.botframework.api.data.Conversation;
 
 /**
  * @author Anton Leliuk
@@ -35,7 +35,7 @@ public interface BotFramework extends ApiBinding {
      * @param parameters Parameters to create the conversation from
      * @return {@link ResourceResponse} resource response
      */
-    ResourceResponse createConversation(ConversationParameters parameters);
+    ResourceResponse createConversation(Conversation parameters);
 
     /**
      * Call this method to enumerate the members of an activity

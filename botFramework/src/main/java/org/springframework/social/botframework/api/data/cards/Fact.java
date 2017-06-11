@@ -1,15 +1,19 @@
 package org.springframework.social.botframework.api.data.cards;
 
 /**
- * Set of key-value pairs. Advantage of this section is that key and value properties will be rendered
- * with default style information with some delimiter between them.
- * So there is no need for developer to specify style information.
+ * Defines a key-value pair that contains a fact.
  * @author Anton Leliuk
  */
 public class Fact {
 
+    /**
+     * Name of the fact. For example, Check-in. The key is used as a label when displaying the fact's value.
+     */
     private String key;
 
+    /**
+     * Value of the fact. For example, <b>10 October 2016.</b>
+     */
     private String value;
 
     public Fact key(String key){

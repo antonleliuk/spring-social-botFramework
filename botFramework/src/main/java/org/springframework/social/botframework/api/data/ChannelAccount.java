@@ -1,18 +1,18 @@
 package org.springframework.social.botframework.api.data;
 
 /**
- * Channel account information needed to route a message
+ * Defines a bot or user account on the channel.
  * @author Anton Leliuk
  */
 public class ChannelAccount {
 
     /**
-     * Channel id for the user or bot on this channel
+     * ID that uniquely identifies the bot or user on the channel.
      */
     private String id;
 
     /**
-     * Display friendly name
+     * Name of the bot or user.
      */
     private String name;
 
