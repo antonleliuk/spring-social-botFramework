@@ -26,7 +26,7 @@ import java.util.Date;
  *          id=28:1a239996-a170-4c7f-9bd4-6502ec582f5e,
  *          name=SystemActivityMonitor
  *      },
- *      text=<ss type="wasntme">(wasntme)</ss>,
+ *      text=&#60;ss type="wasntme"&#61;(wasntme)&#60;/ss&#61;,
  *      entities=[]
  *  }
  *
