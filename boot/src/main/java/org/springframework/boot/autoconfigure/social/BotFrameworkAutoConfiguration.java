@@ -75,7 +75,7 @@ public class BotFrameworkAutoConfiguration {
 
         @Bean
         public BotFrameworkConnectionFactory botFrameworkConnectionFactory(){
-            return new BotFrameworkConnectionFactory(properties.getAppId(), properties.getAppSecret(), properties.getAuthUrl(), properties.getSkypeUrl(), properties.getApiVersion());
+            return new BotFrameworkConnectionFactory(properties.getAppId(), properties.getAppSecret(), properties.getAuthUrl());
         }
 
         @Bean

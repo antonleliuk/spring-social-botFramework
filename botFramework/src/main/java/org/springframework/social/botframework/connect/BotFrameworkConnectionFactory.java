@@ -11,7 +11,7 @@ public class BotFrameworkConnectionFactory extends OAuth2ConnectionFactory<BotFr
 
     public static final String PROVIDER_ID = "botFramework";
 
-    public BotFrameworkConnectionFactory(String clientId, String clientSecret, String accessTokenUrl, String skypeUrl, String apiVersion) {
-        super(PROVIDER_ID, new BotFrameworkServiceProvider(clientId, clientSecret, accessTokenUrl, skypeUrl, apiVersion), null);
+    public BotFrameworkConnectionFactory(String clientId, String clientSecret, String accessTokenUrl) {
+        super(PROVIDER_ID, new BotFrameworkServiceProvider(clientId, clientSecret, accessTokenUrl), null);
     }
 }

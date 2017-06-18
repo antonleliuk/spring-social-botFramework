@@ -11,6 +11,7 @@ import org.springframework.social.botframework.api.json.DictTypeSerializer;
 import org.springframework.social.botframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Basic communication type for BotFramework
@@ -43,7 +44,7 @@ public class Activity extends BaseMessage {
     /**
      * Entities Collection of Entity which contain metadata about this activity (each is typed)
      */
-    private List<Entity> entities;
+    private List<Map<String, Object>> entities;
 
     /**
      * Sender address
@@ -162,14 +163,14 @@ public class Activity extends BaseMessage {
     }
 
     public Activity message(){
-        this.type = ActivityType.text_message;
+        this.type = ActivityType.message;
         return this;
     }
 
-    public Activity card(){
-        this.type = ActivityType.card;
-        return this;
-    }
+//    public Activity card(){
+//        this.type = ActivityType.card;
+//        return this;
+//    }
 
     public Activity attachmentLayout(AttachmentLayout layout){
         this.attachmentLayout = layout;
@@ -231,11 +232,11 @@ public class Activity extends BaseMessage {
         this.conversation = conversation;
     }
 
-    public List<Entity> getEntities() {
+    public List<Map<String, Object>> getEntities() {
         return entities;
     }
 
-    public void setEntities(List<Entity> entities) {
+    public void setEntities(List<Map<String, Object>> entities) {
         this.entities = entities;
     }
 

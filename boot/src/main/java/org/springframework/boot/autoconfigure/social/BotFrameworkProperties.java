@@ -12,11 +12,7 @@ public class BotFrameworkProperties extends SocialProperties {
 
     private String authUrl;
 
-    private String skypeUrl;
-
     private String grantType;
-
-    private String apiVersion;
 
     public String getScope() {
         return scope;
@@ -34,14 +30,6 @@ public class BotFrameworkProperties extends SocialProperties {
         this.authUrl = authUrl;
     }
 
-    public String getSkypeUrl() {
-        return skypeUrl;
-    }
-
-    public void setSkypeUrl(String skypeUrl) {
-        this.skypeUrl = skypeUrl;
-    }
-
     public String getGrantType() {
         return grantType;
     }
@@ -50,11 +38,4 @@ public class BotFrameworkProperties extends SocialProperties {
         this.grantType = grantType;
     }
 
-    public String getApiVersion() {
-        return apiVersion;
-    }
-
-    public void setApiVersion(String apiVersion) {
-        this.apiVersion = apiVersion;
-    }
 }

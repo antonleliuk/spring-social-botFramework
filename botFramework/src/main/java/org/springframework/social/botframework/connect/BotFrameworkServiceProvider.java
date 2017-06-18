@@ -10,13 +10,8 @@ import org.springframework.social.oauth2.OAuth2Template;
  */
 public class BotFrameworkServiceProvider extends AbstractOAuth2ServiceProvider<BotFramework> {
     
-    private String skypeUrl;
-    private String apiVersion;
-
-    public BotFrameworkServiceProvider(String clientId, String clientSecret, String accessTokenUrl, String skypeUrl, String apiVersion) {
+    public BotFrameworkServiceProvider(String clientId, String clientSecret, String accessTokenUrl) {
         super(getOauth2Operations(clientId, clientSecret, accessTokenUrl));
-        this.skypeUrl = skypeUrl;
-        this.apiVersion = apiVersion;
     }
 
     private static OAuth2Template getOauth2Operations(String clientId, String clientSecret, String accessTokenUrl) {
@@ -27,6 +22,6 @@ public class BotFrameworkServiceProvider extends AbstractOAuth2ServiceProvider<B
 
     @Override
     public BotFramework getApi(String accessToken) {
-        return new BotFrameworkTemplate(accessToken, skypeUrl, apiVersion);
+        return new BotFrameworkTemplate(accessToken);
     }
 }

@@ -16,6 +16,9 @@ Microsoft BotFramework service
 
 Microsoft BotFramework text
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/ua.profitsoft.social/spring-social-botframework-text/badge.svg)](https://maven-badges.herokuapp.com/maven-central/ua.profitsoft.social/spring-social-botframework-text)
+
+Microsoft BotFramework DirectLine client
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ua.profitsoft.social/spring-social-botframework-text/badge.svg)](https://maven-badges.herokuapp.com/maven-central/ua.profitsoft.social/spring-social-botframework-directline)
 ## Getting Started
 ### Using Maven
 ```xml
@@ -45,6 +48,11 @@ Microsoft BotFramework text
         <artifactId>spring-social-botframework-text</artifactId>
         <version>0.0.3</version>
     </dependency>
+    <dependency>
+        <groupId>ua.profitsoft.social</groupId>
+        <artifactId>spring-social-botframework-directline</artifactId>
+        <version>0.0.3</version>
+    </dependency>
 </dependencies>
 ```
 
@@ -55,4 +63,10 @@ compile("ua.profitsoft.social:spring-social-botframework-config:0.0.3")
 compile("ua.profitsoft.social:spring-social-botframework-state:0.0.3")
 compile("ua.profitsoft.social:spring-social-botframework-service:0.0.3")
 compile("ua.profitsoft.social:spring-social-botframework-text:0.0.3")
+compile("ua.profitsoft.social:spring-social-botframework-directline:0.0.3")
+```
+
+### Publishing artifacts
+```
+gradlew clean build install uploadArchives -PsigningEnabled=true
 ```

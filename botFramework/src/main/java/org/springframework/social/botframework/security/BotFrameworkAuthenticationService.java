@@ -9,7 +9,7 @@ import org.springframework.social.security.provider.OAuth2AuthenticationService;
  */
 public class BotFrameworkAuthenticationService extends OAuth2AuthenticationService<BotFramework> {
 
-    public BotFrameworkAuthenticationService(String clientId, String clientSecret, String accessTokenUrl, String skypeUrl, String apiVersion) {
-        super(new BotFrameworkConnectionFactory(clientId, clientSecret, accessTokenUrl, skypeUrl, apiVersion));
+    public BotFrameworkAuthenticationService(String clientId, String clientSecret, String accessTokenUrl) {
+        super(new BotFrameworkConnectionFactory(clientId, clientSecret, accessTokenUrl));
     }
 }

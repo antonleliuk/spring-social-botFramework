@@ -46,6 +46,6 @@ public class BotServiceImpl implements BotService {
 
     @Override
     public void reply(Activity answer) {
-        botFramework.sendToConversation(answer.getConversation().getId(), answer);
+        botFramework.sendToConversation(answer.getServiceUrl(), answer.getConversation().getId(), answer);
     }
 }

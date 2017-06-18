@@ -26,34 +26,29 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements BotFramework {
 
-    private String skypeUrl;
-    private String apiVersion;
-
-    public BotFrameworkTemplate(String accessToken, String skypeUrl, String apiVersion) {
+    public BotFrameworkTemplate(String accessToken) {
         super(accessToken);
-        this.skypeUrl = skypeUrl;
-        this.apiVersion = apiVersion;
     }
 
     @Override
-    public byte[] getAttachment(String attachmentId, String viewId) {
-        return getRestTemplate().getForEntity(getMainUrl().pathSegment("attachments", attachmentId, "views", viewId).toUriString(), byte[].class).getBody();
+    public byte[] getAttachment(String serviceUrl, String attachmentId, String viewId) {
+        return getRestTemplate().getForEntity(getMainUrl(serviceUrl).pathSegment("attachments", attachmentId, "views", viewId).toUriString(), byte[].class).getBody();
     }
 
     @Override
-    public AttachmentInfo getAttachmentInfo(String attachmentId) {
-        return getRestTemplate().getForObject(getMainUrl().pathSegment("attachments", attachmentId).toUriString(), AttachmentInfo.class);
+    public AttachmentInfo getAttachmentInfo(String serviceUrl, String attachmentId) {
+        return getRestTemplate().getForObject(getMainUrl(serviceUrl).pathSegment("attachments", attachmentId).toUriString(), AttachmentInfo.class);
     }
 
     @Override
-    public ResourceResponse createConversation(Conversation parameters) {
-        return getRestTemplate().postForObject(getMainUrl().path("conversations").toUriString(), parameters, ResourceResponse.class);
+    public ResourceResponse createConversation(String serviceUrl, Conversation parameters) {
+        return getRestTemplate().postForObject(getMainUrl(serviceUrl).path("conversations").toUriString(), parameters, ResourceResponse.class);
     }
 
     @Override
-    public List<ChannelAccount> listActivityMembers(String conversationId, String activityId) {
+    public List<ChannelAccount> listActivityMembers(String serviceUrl, String conversationId, String activityId) {
         return getRestTemplate().exchange(
-                buildConversationUrl(conversationId).pathSegment("activities", activityId, "members").toUriString(),
+                buildConversationUrl(serviceUrl, conversationId).pathSegment("activities", activityId, "members").toUriString(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<ChannelAccount>>() {
@@ -62,9 +57,9 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
     }
 
     @Override
-    public List<ChannelAccount> listConversationMembers(String conversationId) {
+    public List<ChannelAccount> listConversationMembers(String serviceUrl, String conversationId) {
         return getRestTemplate().exchange(
-                buildConversationUrl(conversationId).pathSegment("members").toUriString(),
+                buildConversationUrl(serviceUrl, conversationId).pathSegment("members").toUriString(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<ChannelAccount>>() {})
@@ -72,19 +67,19 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
     }
 
     @Override
-    public void replyToActivity(String conversationId, String activityId, Activity activity) {
-        getRestTemplate().postForLocation(buildConversationUrl(conversationId).pathSegment("activities", activityId).toUriString(), activity);
+    public void replyToActivity(String serviceUrl, String conversationId, String activityId, Activity activity) {
+        getRestTemplate().postForLocation(buildConversationUrl(serviceUrl, conversationId).pathSegment("activities", activityId).toUriString(), activity);
     }
 
     @Override
-    public void sendToConversation(String conversationId, Activity activity) {
-        getRestTemplate().postForLocation(buildConversationUrl(conversationId).path("activities").toUriString(), activity);
+    public void sendToConversation(String serviceUrl, String conversationId, Activity activity) {
+        getRestTemplate().postForLocation(buildConversationUrl(serviceUrl, conversationId).path("activities").toUriString(), activity);
     }
 
     @Override
-    public ResourceResponse uploadAttachment(String conversationId, AttachmentData attachmentUpload) {
+    public ResourceResponse uploadAttachment(String serviceUrl, String conversationId, AttachmentData attachmentUpload) {
         return getRestTemplate().postForObject(
-                buildConversationUrl(conversationId).pathSegment("attachments").toUriString(),
+                buildConversationUrl(serviceUrl, conversationId).pathSegment("attachments").toUriString(),
                 attachmentUpload,
                 ResourceResponse.class);
     }
@@ -95,12 +90,12 @@ public class BotFrameworkTemplate extends AbstractOAuth2ApiBinding implements Bo
         restTemplate.getInterceptors().add(new LoggingClientHttpRequestInterceptor());
     }
 
-    private UriComponentsBuilder buildConversationUrl(String skypeId){
-        return getMainUrl().pathSegment("conversations", skypeId);
+    private UriComponentsBuilder buildConversationUrl(String serviceUrl, String skypeId){
+        return getMainUrl(serviceUrl).pathSegment("conversations", skypeId);
     }
 
-    private UriComponentsBuilder getMainUrl() {
-        return UriComponentsBuilder.fromHttpUrl(skypeUrl).pathSegment(apiVersion);
+    private UriComponentsBuilder getMainUrl(String serviceUrl) {
+        return UriComponentsBuilder.fromHttpUrl(serviceUrl).pathSegment(VERSION);
     }
 
     private class LoggingClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {

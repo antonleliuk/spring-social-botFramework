@@ -1,6 +1,7 @@
 dependencies {
     compile project(":spring-social-botframework-core")
 }
+
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -12,7 +13,7 @@ uploadArchives {
             pom.project {
                 name "Spring Social Microsoft BotFramework"
                 packaging "jar"
-                description "Spring Social service for Microsoft BotFramework"
+                description "Spring Social Direct line client for Microsoft BotFramework"
                 url "https://github.com/antonleliuk/spring-social-botFramework"
                 inceptionYear "2016"
 

@@ -6,15 +6,16 @@ package org.springframework.social.botframework.api.dict;
 public enum ActivityType implements DictType {
 
     unknown("unknown"),
-    text_message("message/text"),
+//    text_message("message/text"),
     message("message"),
-    attachment("message/image"),
+//    attachment("message/image"),
     contactRelationUpdate("contactRelationUpdate"),
     conversationUpdate("conversationUpdate"),
     typing("typing"),
     ping("ping"),
-    deleteUserData("activity/deleteUserData"),
-    card("message/card.carousel");
+    deleteUserData("deleteUserData"),
+//    card("message/card.carousel"),
+    endOfConversation("endOfConversation");
 
     private String type;
 
