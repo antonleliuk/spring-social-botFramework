@@ -3,13 +3,14 @@ package org.springframework.social.botframework.api.data.cards;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.botframework.api.data.MediaUrl;
 import org.springframework.social.botframework.api.data.ThumbnailUrl;
+import org.springframework.social.botframework.util.CollectionUtils;
 
 import java.util.List;
 
 /**
  * @author Anton Leliuk
  */
-public abstract class MultimediaCard extends AbstractCard {
+public abstract class MultimediaCard<C extends MultimediaCard<C>> extends AbstractCard<C> {
 
     /**
      * Flag that indicates whether to replay the list of videos when the last one ends. Set this property to true to
@@ -46,6 +47,36 @@ public abstract class MultimediaCard extends AbstractCard {
      * be shared; otherwise, false. The default value is true.
      */
     private boolean shareable = true;
+
+    public C autoLoop(boolean autoLoop){
+        this.autoLoop = autoLoop;
+        return (C) this;
+    }
+
+    public C autoStart(boolean autoStart){
+        this.autoStart = autoStart;
+        return (C) this;
+    }
+
+    public C shareable(boolean shareable){
+        this.shareable = shareable;
+        return (C) this;
+    }
+
+    public C button(CardAction button){
+        this.buttons = CollectionUtils.add(buttons, button);
+        return (C) this;
+    }
+
+    public C media(MediaUrl mediaUrl){
+        this.media = CollectionUtils.add(media, mediaUrl);
+        return (C) this;
+    }
+
+    public C image(ThumbnailUrl image){
+        this.image = image;
+        return (C) this;
+    }
 
     public boolean isAutoLoop() {
         return autoLoop;

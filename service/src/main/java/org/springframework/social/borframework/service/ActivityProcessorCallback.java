@@ -7,17 +7,19 @@ import org.springframework.social.botframework.api.data.Activity;
  */
 public interface ActivityProcessorCallback {
 
-    void onPersonalMessage(Activity activity);
+    default void onPersonalMessage(Activity activity) {};
 
-    void onGroupMessage(Activity activity);
+    default void onGroupMessage(Activity activity) {};
 
-    void onContactRelationUpdate(Activity activity);
+    default void onContactRelationUpdate(Activity activity){};
 
-    void onConversationUpdate(Activity activity);
+    default void onConversationUpdate(Activity activity) {};
 
-    void onTyping(Activity activity);
+    default void onTyping(Activity activity) {};
 
-    void onPing(Activity activity);
+    default void onPing(Activity activity) {};
 
-    void onDeleteUserData(Activity activity);
+    default void onDeleteUserData(Activity activity) {};
+
+    default void onEndOfConversation(Activity activity) {};
 }

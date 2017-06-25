@@ -3,14 +3,17 @@ package org.springframework.social.botframework.api.data.cards.adaptiveCard.data
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.data.actions.Action;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.CardElementType;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.ColumnSize;
+import org.springframework.social.botframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * Defines a container that is part of a ColumnSet
  * @author Anton Leliuk
  */
-public class Column extends CardElement {
+public class Column extends CardElement<Column> {
 
-    private CardElement[] items;
+    private List<CardElement> items;
 
     private Action selectionAction;
 
@@ -21,11 +24,26 @@ public class Column extends CardElement {
         return CardElementType.Column;
     }
 
-    public CardElement[] getItems() {
+    public Column item(CardElement element){
+        this.items = CollectionUtils.add(items, element);
+        return this;
+    }
+
+    public Column selectionAction(Action action){
+        this.selectionAction = action;
+        return this;
+    }
+
+    public Column size(ColumnSize size){
+        this.size = size;
+        return this;
+    }
+
+    public List<CardElement> getItems() {
         return items;
     }
 
-    public void setItems(CardElement[] items) {
+    public void setItems(List<CardElement> items) {
         this.items = items;
     }
 

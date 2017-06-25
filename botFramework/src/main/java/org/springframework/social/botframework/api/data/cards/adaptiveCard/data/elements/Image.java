@@ -9,7 +9,7 @@ import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.
  * The Image Item allows for the inclusion of images in an Adaptive Card.
  * @author Anton Leliuk
  */
-public class Image extends CardElement {
+public class Image extends CardElement<Image> {
 
     /**
      * Alternate text for the image for accessibility
@@ -30,6 +30,31 @@ public class Image extends CardElement {
     @Override
     public CardElementType getType() {
         return CardElementType.Image;
+    }
+
+    public Image altText(String altText){
+        this.altText = altText;
+        return this;
+    }
+
+    public Image horizontalAlignment(HorizontalAlignment horizontalAlignment){
+        this.horizontalAlignment = horizontalAlignment;
+        return this;
+    }
+
+    public Image selectionAction(Action action){
+        this.selectionAction = action;
+        return this;
+    }
+
+    public Image style(ImageStyle style){
+        this.style = style;
+        return this;
+    }
+
+    public Image url(String url){
+        this.url = url;
+        return this;
     }
 
     public String getAltText() {

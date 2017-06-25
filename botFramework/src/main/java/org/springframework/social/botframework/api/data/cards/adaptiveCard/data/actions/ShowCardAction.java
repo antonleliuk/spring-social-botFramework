@@ -7,9 +7,14 @@ import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.
  * Action.ShowCard defines an inline AdaptiveCard which is shown to the user when it is clicked.
  * @author Anton Leliuk
  */
-public class ShowCardAction extends Action {
+public class ShowCardAction extends Action<ShowCardAction> {
 
     private Container card;
+
+    public ShowCardAction card(Container card){
+        this.card = card;
+        return this;
+    }
 
     @Override
     public ActionType getType() {

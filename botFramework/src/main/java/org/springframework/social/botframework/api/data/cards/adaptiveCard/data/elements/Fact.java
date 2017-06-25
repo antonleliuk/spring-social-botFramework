@@ -11,6 +11,21 @@ public class Fact {
 
     private String value;
 
+    public Fact title(String title){
+        this.title = title;
+        return this;
+    }
+
+    public Fact speak(String speak){
+        this.speak = speak;
+        return this;
+    }
+
+    public Fact value(String value){
+        this.value = value;
+        return this;
+    }
+
     public String getTitle() {
         return title;
     }

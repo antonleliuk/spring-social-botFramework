@@ -9,7 +9,7 @@ import org.springframework.social.botframework.util.CollectionUtils;
 /**
  * @author Anton Leliuk
  */
-public class ThumbnailCard extends AbstractCard {
+public class ThumbnailCard extends AbstractCard<ThumbnailCard> {
 
     /**
      * Set of actions applicable to the current card
@@ -26,12 +26,12 @@ public class ThumbnailCard extends AbstractCard {
      */
     private CardAction tap;
 
-    public ThumbnailCard addButton(CardAction button){
+    public ThumbnailCard button(CardAction button){
         this.buttons = CollectionUtils.add(buttons, button);
         return this;
     }
 
-    public ThumbnailCard addImage(CardImage image){
+    public ThumbnailCard image(CardImage image){
         this.images = CollectionUtils.add(images, image);
         return this;
     }

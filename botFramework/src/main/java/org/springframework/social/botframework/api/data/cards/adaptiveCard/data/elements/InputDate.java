@@ -8,7 +8,7 @@ import java.util.Date;
  * Input.Date collects Date from the user
  * @author Anton Leliuk
  */
-public class InputDate extends InputCardElement<Date> {
+public class InputDate extends InputCardElement<Date, InputDate> {
 
     /**
      * hint of maximum value expressed in iso-8601 format (may be ignored by some clients)
@@ -32,6 +32,16 @@ public class InputDate extends InputCardElement<Date> {
     @Override
     public Date getValue() {
         return super.getValue();
+    }
+
+    public InputDate max(String max){
+        this.max = max;
+        return this;
+    }
+
+    public InputDate min(String min){
+        this.min = min;
+        return this;
     }
 
     public String getMax() {

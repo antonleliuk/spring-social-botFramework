@@ -3,16 +3,19 @@ package org.springframework.social.botframework.api.data.cards.adaptiveCard.data
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.data.actions.Action;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.CardElementType;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.ContainerStyle;
+import org.springframework.social.botframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * The Container is a CardItem which contains a list of CardItems that are logically grouped
  * @author Anton Leliuk
  */
-public class Container extends CardElement {
+public class Container extends CardElement<Container> {
 
-    private Action[] actions;
+    private List<Action> actions;
 
-    private CardElement[] items;
+    private List<CardElement> items;
 
     private Action selectionAction;
 
@@ -23,19 +26,39 @@ public class Container extends CardElement {
         return CardElementType.Container;
     }
 
-    public Action[] getActions() {
+    public Container action(Action action){
+        this.actions = CollectionUtils.add(actions, action);
+        return this;
+    }
+
+    public Container item(CardElement element){
+        this.items = CollectionUtils.add(items, element);
+        return this;
+    }
+
+    public Container selectionAction(Action action){
+        this.selectionAction = action;
+        return this;
+    }
+
+    public Container style(ContainerStyle style){
+        this.style = style;
+        return this;
+    }
+
+    public List<Action> getActions() {
         return actions;
     }
 
-    public void setActions(Action[] actions) {
+    public void setActions(List<Action> actions) {
         this.actions = actions;
     }
 
-    public CardElement[] getItems() {
+    public List<CardElement> getItems() {
         return items;
     }
 
-    public void setItems(CardElement[] items) {
+    public void setItems(List<CardElement> items) {
         this.items = items;
     }
 

@@ -1,14 +1,14 @@
 package org.springframework.social.botframework.api.data.cards;
 
-import java.util.List;
-
 import org.springframework.social.botframework.api.dict.CardType;
 import org.springframework.social.botframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * @author Anton Leliuk
  */
-public class HeroCard extends AbstractCard {
+public class HeroCard extends AbstractCard<HeroCard> {
 
     /**
      * Set of actions applicable to the current card
@@ -30,12 +30,12 @@ public class HeroCard extends AbstractCard {
         return CardType.HERO_CARD;
     }
 
-    public HeroCard addButton(CardAction button){
+    public HeroCard button(CardAction button){
         buttons = CollectionUtils.add(buttons, button);
         return this;
     }
 
-    public HeroCard addImage(CardImage image){
+    public HeroCard image(CardImage image){
         images = CollectionUtils.add(images, image);
         return this;
     }

@@ -7,7 +7,7 @@ import org.springframework.social.botframework.api.json.DictTypeSerializer;
 /**
  * @author Anton Leliuk
  */
-public abstract class Action {
+public abstract class Action<A extends Action<A>> {
 
     /**
      * Label for button or link that represents this action
@@ -16,6 +16,11 @@ public abstract class Action {
 
     @JsonSerialize(using = DictTypeSerializer.class)
     public abstract ActionType getType();
+
+    public A title(String title){
+        this.title = title;
+        return (A) this;
+    }
 
     public String getTitle() {
         return title;

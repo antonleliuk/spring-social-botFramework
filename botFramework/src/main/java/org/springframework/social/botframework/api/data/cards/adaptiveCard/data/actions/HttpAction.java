@@ -3,6 +3,7 @@ package org.springframework.social.botframework.api.data.cards.adaptiveCard.data
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.ActionType;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.HttpMethod;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Map;
  * to an arbitrary url.
  * @author Anton Leliuk
  */
-public class HttpAction extends Action {
+public class HttpAction extends Action<HttpAction> {
 
     /**
      * content to post (can have binding information)
@@ -21,7 +22,7 @@ public class HttpAction extends Action {
     /**
      * Object which represents headers Example: { \"content-type\":\"application/json\" }
      */
-    private Map<String, String> headers;
+    private Map<String, String> headers = new HashMap<>();
 
     /**
      * Http method (Default: POST)
@@ -33,6 +34,26 @@ public class HttpAction extends Action {
      * url to use (can have binding information)
      */
     private String url;
+
+    public HttpAction body(String body){
+        this.body = body;
+        return this;
+    }
+
+    public HttpAction header(String key, String value){
+        headers.putIfAbsent(key, value);
+        return this;
+    }
+
+    public HttpAction method(HttpMethod method){
+        this.method = method;
+        return this;
+    }
+
+    public HttpAction url(String url){
+        this.url = url;
+        return this;
+    }
 
     @Override
     public ActionType getType() {

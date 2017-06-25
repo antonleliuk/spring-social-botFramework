@@ -6,7 +6,7 @@ import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.
  * Input.Number collects number from the user
  * @author Anton Leliuk
  */
-public class InputNumber extends InputCardElement<Number> {
+public class InputNumber extends InputCardElement<Number, InputNumber> {
 
     /**
      * hint of maximum value (may be ignored by some clients)
@@ -21,6 +21,16 @@ public class InputNumber extends InputCardElement<Number> {
     @Override
     public CardElementType getType() {
         return CardElementType.InputNumber;
+    }
+
+    public InputNumber max(Number max){
+        this.max = max;
+        return this;
+    }
+
+    public InputNumber min(Number min){
+        this.min = min;
+        return this;
     }
 
     public Number getMax() {

@@ -6,7 +6,7 @@ import org.springframework.social.botframework.api.dict.CardType;
  * Defines a card that can play videos.
  * @author Anton Leliuk
  */
-public class VideoCard extends MultimediaCard {
+public class VideoCard extends MultimediaCard<VideoCard> {
 
     @Override
     public CardType getCardType() {

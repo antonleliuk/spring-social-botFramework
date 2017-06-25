@@ -1,23 +1,19 @@
 package org.springframework.social.botframework.api.data.cards;
 
-import org.springframework.social.botframework.api.data.cards.adaptiveCard.data.elements.CardElement;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.data.actions.Action;
+import org.springframework.social.botframework.api.data.cards.adaptiveCard.data.elements.CardElement;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.CardElementType;
 import org.springframework.social.botframework.api.dict.CardType;
+import org.springframework.social.botframework.util.CollectionUtils;
 
 import java.util.List;
 
 /**
  * @author Anton Leliuk
  */
-public class AdaptiveCard extends AbstractCard {
+public class AdaptiveCard extends AbstractCard<AdaptiveCard> {
 
     private CardElementType type = CardElementType.AdaptiveCard;
-
-    /**
-     * Title/caption for the adaptive card.
-     */
-    private String title;
 
     /**
      * The items that are to be displayed in this container.
@@ -45,6 +41,31 @@ public class AdaptiveCard extends AbstractCard {
      */
     private String fallbackText;
 
+    public AdaptiveCard type(CardElementType type){
+        this.type = type;
+        return this;
+    }
+
+    public AdaptiveCard body(CardElement element){
+        this.body = CollectionUtils.add(body, element);
+        return this;
+    }
+
+    public AdaptiveCard action(Action action){
+        this.actions = CollectionUtils.add(actions, action);
+        return this;
+    }
+
+    public AdaptiveCard minVersion(String minVersion){
+        this.minVersion = minVersion;
+        return this;
+    }
+
+    public AdaptiveCard fallbackText(String text){
+        this.fallbackText = text;
+        return this;
+    }
+
     @Override
     public CardType getCardType() {
         return CardType.ADAPTIVE_CARD;
@@ -56,16 +77,6 @@ public class AdaptiveCard extends AbstractCard {
 
     public void setType(CardElementType type) {
         this.type = type;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public List<CardElement> getBody() {

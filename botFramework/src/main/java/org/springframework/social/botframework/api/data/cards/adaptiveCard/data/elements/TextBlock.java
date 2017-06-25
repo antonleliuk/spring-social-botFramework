@@ -13,7 +13,7 @@ import org.springframework.social.botframework.api.json.DictTypeSerializer;
  * The TextBlock Item allows for the inclusion of text, with various font sizes, weight and color, in Adaptive Cards.
  * @author Anton Leliuk
  */
-public class TextBlock extends CardElement {
+public class TextBlock extends CardElement<TextBlock> {
 
     /**
      * Controls the color of TextBlock Items.
@@ -57,6 +57,46 @@ public class TextBlock extends CardElement {
     @Override
     public CardElementType getType() {
         return CardElementType.TextBlock;
+    }
+
+    public TextBlock color(Color color){
+        this.color = color;
+        return this;
+    }
+
+    public TextBlock horizontalAlignment(HorizontalAlignment horizontalAlignment){
+        this.horizontalAlignment = horizontalAlignment;
+        return this;
+    }
+
+    public TextBlock subtle(boolean subtle){
+        this.subtle = subtle;
+        return this;
+    }
+
+    public TextBlock maxLines(int maxLines){
+        this.maxLines = maxLines;
+        return this;
+    }
+
+    public TextBlock size(Size size){
+        this.size = size;
+        return this;
+    }
+
+    public TextBlock text(String text){
+        this.text = text;
+        return this;
+    }
+
+    public TextBlock weight(Weight weight){
+        this.weight = weight;
+        return this;
+    }
+
+    public TextBlock wrap(boolean wrap){
+        this.wrap = wrap;
+        return this;
     }
 
     public Color getColor() {

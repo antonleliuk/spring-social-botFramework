@@ -8,7 +8,7 @@ import org.springframework.social.botframework.util.CollectionUtils;
 /**
  * @author Anton Leliuk
  */
-public class ReceiptCard extends AbstractCard {
+public class ReceiptCard extends AbstractCard<ReceiptCard> {
 
     /**
      * Set of actions applicable to the current card
@@ -45,7 +45,7 @@ public class ReceiptCard extends AbstractCard {
      */
     private String vat;
 
-    public ReceiptCard addButton(CardAction button){
+    public ReceiptCard button(CardAction button){
         this.buttons = CollectionUtils.add(buttons, button);
         return this;
     }
@@ -55,12 +55,12 @@ public class ReceiptCard extends AbstractCard {
         return this;
     }
 
-    public ReceiptCard addFact(Fact fact){
+    public ReceiptCard fact(Fact fact){
         this.facts = CollectionUtils.add(facts, fact);
         return this;
     }
 
-    public ReceiptCard addItem(ReceiptItem item){
+    public ReceiptCard item(ReceiptItem item){
         this.items = CollectionUtils.add(items, item);
         return this;
     }

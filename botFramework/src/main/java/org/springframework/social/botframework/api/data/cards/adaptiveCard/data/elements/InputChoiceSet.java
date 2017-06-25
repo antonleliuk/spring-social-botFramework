@@ -3,16 +3,19 @@ package org.springframework.social.botframework.api.data.cards.adaptiveCard.data
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.CardElementType;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.ChoiceInputStyle;
+import org.springframework.social.botframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * @author Anton Leliuk
  */
-public class InputChoiceSet extends CardElement {
+public class InputChoiceSet extends CardElement<InputChoiceSet> {
 
     /**
      * Shows an array of Choice objects
      */
-    private Choice[] choices;
+    private List<Choice> choices;
 
     /**
      * Id for the value (will be used to identify collected input when SUBMIT is clicked)
@@ -29,11 +32,31 @@ public class InputChoiceSet extends CardElement {
         return CardElementType.InputChoiceSet;
     }
 
-    public Choice[] getChoices() {
+    public InputChoiceSet choice(Choice choice){
+        this.choices = CollectionUtils.add(choices, choice);
+        return this;
+    }
+
+    public InputChoiceSet id(String id){
+        this.id = id;
+        return this;
+    }
+
+    public InputChoiceSet multiSelect(boolean multiSelect){
+        this.multiSelect = multiSelect;
+        return this;
+    }
+
+    public InputChoiceSet style(ChoiceInputStyle style){
+        this.style = style;
+        return this;
+    }
+
+    public List<Choice> getChoices() {
         return choices;
     }
 
-    public void setChoices(Choice[] choices) {
+    public void setChoices(List<Choice> choices) {
         this.choices = choices;
     }
 

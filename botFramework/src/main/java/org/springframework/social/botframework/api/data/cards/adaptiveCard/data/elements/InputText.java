@@ -8,7 +8,7 @@ import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.
  * Input.Text collects text from the user
  * @author Anton Leliuk
  */
-public class InputText extends InputCardElement<String> {
+public class InputText extends InputCardElement<String, InputText> {
 
     @JsonProperty("isMultiline")
     private boolean multiLine;
@@ -23,6 +23,21 @@ public class InputText extends InputCardElement<String> {
     @Override
     public CardElementType getType() {
         return CardElementType.InputText;
+    }
+
+    public InputText multiLine(boolean multiLine){
+        this.multiLine = multiLine;
+        return this;
+    }
+
+    public InputText maxLength(Integer maxLength){
+        this.maxLength = maxLength;
+        return this;
+    }
+
+    public InputText style(TextInputStyle style){
+        this.style = style;
+        return this;
     }
 
     public boolean isMultiLine() {

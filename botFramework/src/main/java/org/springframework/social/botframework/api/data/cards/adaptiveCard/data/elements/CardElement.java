@@ -8,7 +8,7 @@ import org.springframework.social.botframework.api.json.DictTypeSerializer;
 /**
  * @author Anton Leliuk
  */
-public abstract class CardElement {
+public abstract class CardElement<E extends CardElement<E>> {
 
     /**
      * Specifies what should be spoken for this entire Item. This is simple text or SSML fragment
@@ -20,6 +20,16 @@ public abstract class CardElement {
 
     @JsonSerialize(using = DictTypeSerializer.class)
     public abstract CardElementType getType();
+
+    public E speak(String speak){
+        this.speak = speak;
+        return (E) this;
+    }
+
+    public E separation(SeparationStyle style){
+        this.separation = style;
+        return (E) this;
+    }
 
     public String getSpeak() {
         return speak;

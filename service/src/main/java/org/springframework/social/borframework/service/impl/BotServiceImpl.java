@@ -36,6 +36,9 @@ public class BotServiceImpl implements BotService {
             case deleteUserData:
                 callback.onDeleteUserData(activity);
                 break;
+            case endOfConversation:
+                callback.onEndOfConversation(activity);
+                break;
         }
     }
 

@@ -6,7 +6,7 @@ import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.
  * Input.Toggle collects text from the user
  * @author Anton Leliuk
  */
-public class InputToggle extends InputCardElement<Boolean> {
+public class InputToggle extends InputCardElement<Boolean, InputToggle> {
 
     /**
      * Title for the toggle
@@ -21,11 +21,26 @@ public class InputToggle extends InputCardElement<Boolean> {
     /**
      * The value when toggle is on (default:true)
      */
-    private boolean valueOn = false;
+    private boolean valueOn = true;
 
     @Override
     public CardElementType getType() {
         return CardElementType.InputToggle;
+    }
+
+    public InputToggle title(String title){
+        this.title = title;
+        return this;
+    }
+
+    public InputToggle valueOff(boolean valueOff){
+        this.valueOff = valueOff;
+        return this;
+    }
+
+    public InputToggle valueOn(boolean valueOn){
+        this.valueOn = valueOn;
+        return this;
     }
 
     public String getTitle() {

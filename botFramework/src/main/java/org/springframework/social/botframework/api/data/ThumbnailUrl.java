@@ -16,6 +16,16 @@ public class ThumbnailUrl {
      */
     private String url;
 
+    public ThumbnailUrl alt(String alt){
+        this.alt = alt;
+        return this;
+    }
+
+    public ThumbnailUrl url(String url){
+        this.url = url;
+        return this;
+    }
+
     public String getAlt() {
         return alt;
     }

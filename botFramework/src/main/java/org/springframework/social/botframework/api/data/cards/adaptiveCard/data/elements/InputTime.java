@@ -8,7 +8,7 @@ import java.util.Date;
  * Input.Time collects Time from the user
  * @author Anton Leliuk
  */
-public class InputTime extends InputCardElement<Date> {
+public class InputTime extends InputCardElement<Date, InputTime> {
 
     /**
      * hint of maximum value (may be ignored by some clients)
@@ -28,6 +28,16 @@ public class InputTime extends InputCardElement<Date> {
     @Override
     public Date getValue() {
         return super.getValue();
+    }
+
+    public InputTime max(String max){
+        this.max = max;
+        return this;
+    }
+
+    public InputTime min(String min){
+        this.min = min;
+        return this;
     }
 
     public String getMax() {

@@ -16,14 +16,15 @@ import org.springframework.social.UserIdSource;
 import org.springframework.social.borframework.service.BotService;
 import org.springframework.social.borframework.service.impl.BotServiceImpl;
 import org.springframework.social.botframework.api.BotFramework;
+import org.springframework.social.botframework.api.proxy.BotFrameworkReConnectHandler;
 import org.springframework.social.botframework.connect.BotFrameworkConnectionFactory;
 import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
-import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.oauth2.AccessGrant;
+
+import java.lang.reflect.Proxy;
 
 /**
  * @author Anton Leliuk
@@ -57,15 +58,8 @@ public class BotFrameworkAutoConfiguration {
         @Bean
         @ConditionalOnMissingBean(BotFramework.class)
         public BotFramework botFramework(ConnectionRepository repository, BotFrameworkConnectionFactory connectionFactory){
-            Connection<BotFramework> botFrameworkConnection = repository.findPrimaryConnection(BotFramework.class);
-            if (botFrameworkConnection == null) {
-                AccessGrant accessGrant = connectionFactory.getOAuthOperations().authenticateClient(properties.getScope());
-                Connection<BotFramework> connection = connectionFactory.createConnection(accessGrant);
-                repository.addConnection(connection);
-                botFrameworkConnection = repository.findPrimaryConnection(BotFramework.class);
-                assert botFrameworkConnection != null;
-            }
-            return botFrameworkConnection.getApi();
+            Class<?>[] interfaces = {BotFramework.class};
+            return (BotFramework) Proxy.newProxyInstance(this.getClass().getClassLoader(), interfaces, new BotFrameworkReConnectHandler(repository, connectionFactory, properties.getScope()));
         }
 
         @Bean

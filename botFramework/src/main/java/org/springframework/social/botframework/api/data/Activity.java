@@ -152,7 +152,7 @@ public class Activity extends BaseMessage {
         return type;
     }
 
-    public <C>Activity addAttachment(Attachment<C> attachment){
+    public <C> Activity addAttachment(Attachment<C> attachment){
         attachments = CollectionUtils.add(attachments, attachment);
         return this;
     }
@@ -166,11 +166,6 @@ public class Activity extends BaseMessage {
         this.type = ActivityType.message;
         return this;
     }
-
-//    public Activity card(){
-//        this.type = ActivityType.card;
-//        return this;
-//    }
 
     public Activity attachmentLayout(AttachmentLayout layout){
         this.attachmentLayout = layout;

@@ -10,7 +10,7 @@ import org.springframework.social.botframework.util.CollectionUtils;
  * A card representing a request to signing
  * @author Anton Leliuk
  */
-public class SignInCard extends AbstractCard {
+public class SignInCard extends AbstractCard<SignInCard> {
 
     /**
      * Action to use to perform sign-in
@@ -22,7 +22,7 @@ public class SignInCard extends AbstractCard {
         return CardType.SIGN_IN_CARD;
     }
 
-    public SignInCard addButton(CardAction button){
+    public SignInCard button(CardAction button){
         this.buttons = CollectionUtils.add(buttons, button);
         return this;
     }

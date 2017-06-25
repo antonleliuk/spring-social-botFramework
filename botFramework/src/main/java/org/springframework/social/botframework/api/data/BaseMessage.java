@@ -111,4 +111,12 @@ public abstract class BaseMessage {
     public void setChannelId(String channelId) {
         this.channelId = channelId;
     }
+
+    public Date getLocalTimestamp() {
+        return localTimestamp;
+    }
+
+    public void setLocalTimestamp(Date localTimestamp) {
+        this.localTimestamp = localTimestamp;
+    }
 }

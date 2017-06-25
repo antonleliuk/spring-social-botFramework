@@ -6,7 +6,7 @@ import org.springframework.social.botframework.api.dict.CardType;
  * Defines a card that can play an audio file.
  * @author Anton Leliuk
  */
-public class AudioCard extends MultimediaCard {
+public class AudioCard extends MultimediaCard<AudioCard> {
 
     @Override
     public CardType getCardType() {

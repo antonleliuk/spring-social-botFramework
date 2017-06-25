@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Anton Leliuk
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CardElement {
+public class CardElement<C extends CardElement<C>> {
 
     /**
      * Subtitle of the card
@@ -25,17 +25,17 @@ public class CardElement {
      */
     private String title;
 
-    public <C extends CardElement> C title(String title){
+    public C title(String title){
         this.title = title;
         return (C)this;
     }
 
-    public <C extends CardElement> C subTitle(String subTitle){
+    public C subTitle(String subTitle){
         this.subTitle = subTitle;
-        return (C)this;
+        return (C) this;
     }
 
-    public <C extends CardElement> C text(String text){
+    public C text(String text){
         this.text = text;
         return (C)this;
     }

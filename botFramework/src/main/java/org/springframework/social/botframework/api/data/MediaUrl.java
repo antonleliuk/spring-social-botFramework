@@ -16,6 +16,16 @@ public class MediaUrl {
      */
     private String url;
 
+    public MediaUrl profile(String profile){
+        this.profile = profile;
+        return this;
+    }
+
+    public MediaUrl url(String url){
+        this.url = url;
+        return this;
+    }
+
     public String getProfile() {
         return profile;
     }

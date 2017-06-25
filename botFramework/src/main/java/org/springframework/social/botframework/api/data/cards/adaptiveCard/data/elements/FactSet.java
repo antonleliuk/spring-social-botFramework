@@ -1,25 +1,32 @@
 package org.springframework.social.botframework.api.data.cards.adaptiveCard.data.elements;
 
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.CardElementType;
+import org.springframework.social.botframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * @author Anton Leliuk
  */
-public class FactSet extends CardElement {
+public class FactSet extends CardElement<FactSet> {
 
-    private Fact[] facts;
+    private List<Fact> facts;
 
     @Override
     public CardElementType getType() {
         return CardElementType.FactSet;
     }
 
-    public Fact[] getFacts() {
+    public FactSet fact(Fact fact){
+        this.facts = CollectionUtils.add(facts, fact);
+        return this;
+    }
+
+    public List<Fact> getFacts() {
         return facts;
     }
 
-    public void setFacts(Fact[] facts) {
+    public void setFacts(List<Fact> facts) {
         this.facts = facts;
     }
-
 }

@@ -9,7 +9,7 @@ import org.springframework.social.botframework.api.json.DictTypeSerializer;
 /**
  * @author Anton Leliuk
  */
-public abstract class AbstractCard extends CardElement {
+public abstract class AbstractCard<C extends CardElement<C>> extends CardElement<C> {
 
     @JsonIgnore
     public <C extends AbstractCard> Attachment<C> toAttachment(){

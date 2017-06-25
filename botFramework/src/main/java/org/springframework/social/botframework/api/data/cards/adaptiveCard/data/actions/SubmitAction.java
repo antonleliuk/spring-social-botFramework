@@ -8,12 +8,17 @@ import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.
  * For example: With BotFramework bots the client would send an activity through the messaging medium to the bot.
  * @author Anton Leliuk
  */
-public class SubmitAction extends Action {
+public class SubmitAction extends Action<SubmitAction> {
 
     /**
      * initial data that input fields will be combined with. This is essentially 'hidden' properties
      */
     private Object data;
+
+    public SubmitAction data(Object data){
+        this.data = data;
+        return this;
+    }
 
     @Override
     public ActionType getType() {
