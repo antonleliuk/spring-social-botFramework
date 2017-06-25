@@ -9,6 +9,7 @@ import org.springframework.social.oauth2.AccessGrant;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * {@link InvocationHandler} which will refresh access token
@@ -19,6 +20,8 @@ public class BotFrameworkReConnectHandler implements InvocationHandler {
     private ConnectionRepository repository;
     private BotFrameworkConnectionFactory connectionFactory;
     private String scope;
+
+    private ReentrantLock lock = new ReentrantLock();
 
     public BotFrameworkReConnectHandler(ConnectionRepository repository, BotFrameworkConnectionFactory connectionFactory, String scope) {
         this.repository = repository;
@@ -49,10 +52,19 @@ public class BotFrameworkReConnectHandler implements InvocationHandler {
                 repository.removeConnection(botFramework.getKey());
             }
 
-            AccessGrant accessGrant = connectionFactory.getOAuthOperations().authenticateClient(scope);
-            Connection<BotFramework> connection = connectionFactory.createConnection(accessGrant);
-            repository.addConnection(connection);
-            botFramework = repository.findPrimaryConnection(BotFramework.class);
+            lock.lock();
+            try {
+                botFramework = repository.findPrimaryConnection(BotFramework.class);
+                if (botFramework == null) {
+                    AccessGrant accessGrant = connectionFactory.getOAuthOperations().authenticateClient(scope);
+                    Connection<BotFramework> connection = connectionFactory.createConnection(accessGrant);
+                    repository.addConnection(connection);
+                    botFramework = repository.findPrimaryConnection(BotFramework.class);
+                }
+            } finally {
+                lock.unlock();
+            }
+
         }
         return botFramework;
     }

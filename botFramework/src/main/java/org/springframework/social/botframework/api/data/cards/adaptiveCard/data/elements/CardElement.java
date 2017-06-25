@@ -1,5 +1,6 @@
 package org.springframework.social.botframework.api.data.cards.adaptiveCard.data.elements;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.CardElementType;
 import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.SeparationStyle;
@@ -8,6 +9,7 @@ import org.springframework.social.botframework.api.json.DictTypeSerializer;
 /**
  * @author Anton Leliuk
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class CardElement<E extends CardElement<E>> {
 
     /**
