@@ -39,6 +39,8 @@ public class BotServiceImpl implements BotService {
             case endOfConversation:
                 callback.onEndOfConversation(activity);
                 break;
+            default:
+                break;
         }
     }
 

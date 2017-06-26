@@ -10,10 +10,12 @@ public class CollectionUtils {
 
     public static <E>List<E> add(List<E> list, E element){
         if (element != null) {
-            if(list == null){
-                list = new ArrayList<>();
+            List<E> newList = new ArrayList<E>();
+            if (list != null) {
+                newList.addAll(list);
             }
-            list.add(element);
+            newList.add(element);
+            return newList;
         }
         return list;
     }

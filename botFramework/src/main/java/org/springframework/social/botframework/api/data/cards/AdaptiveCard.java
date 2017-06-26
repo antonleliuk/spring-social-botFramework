@@ -1,8 +1,8 @@
 package org.springframework.social.botframework.api.data.cards;
 
-import org.springframework.social.botframework.api.data.cards.adaptiveCard.data.actions.Action;
-import org.springframework.social.botframework.api.data.cards.adaptiveCard.data.elements.CardElement;
-import org.springframework.social.botframework.api.data.cards.adaptiveCard.dict.CardElementType;
+import org.springframework.social.botframework.api.data.cards.adaptive.data.actions.Action;
+import org.springframework.social.botframework.api.data.cards.adaptive.data.elements.CardElement;
+import org.springframework.social.botframework.api.data.cards.adaptive.dict.CardElementType;
 import org.springframework.social.botframework.api.dict.CardType;
 import org.springframework.social.botframework.util.CollectionUtils;
 
