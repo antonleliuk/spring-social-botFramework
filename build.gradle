@@ -8,7 +8,7 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
     group = "ua.profitsoft.social"
-    version = "0.1.0-SNAPSHOT"
+    version = "0.1.0"
 
     ext {
         localSonatypeUserName = project.hasProperty("sonatypeUsername") ? project.sonatypeUsername : ""
